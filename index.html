@@ -1,0 +1,295 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Division Reporting by JK · v3.6</title><script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script><style>
+:root{--blue:#315ee7;--ink:#182942;--muted:#69768a;--line:#e3e8f0;--bg:#f4f6fa;--red:#bc3849}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:13px 'Segoe UI',Arial,sans-serif}button,input,select{font:inherit}button,summary{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #87a4fa;outline-offset:2px}[hidden]{display:none!important}button{border:1px solid var(--line);background:white;color:var(--ink);border-radius:7px;padding:8px 11px;font-weight:600;min-height:34px}button:hover{background:#f0f4ff}button:disabled{opacity:.45;cursor:default}.primary{background:var(--blue);border-color:var(--blue);color:white}.primary:hover{background:#254ac0}input,select{border:1px solid #d7deea;border-radius:6px;padding:8px;background:white;color:var(--ink);min-width:0}input[type=checkbox],input[type=radio]{accent-color:var(--blue)}.sidebar{position:fixed;inset:0 auto 0 0;width:290px;background:#fff;border-right:1px solid var(--line);overflow-y:auto;padding:22px 18px;z-index:5}.brand{display:flex;align-items:center;gap:12px;margin-bottom:24px}.logo{width:45px;height:45px;display:grid;place-items:center;background:#192e50;color:white;border-radius:12px;font-size:20px;font-weight:750;letter-spacing:-2px;flex-shrink:0}.brand strong{display:block;font-size:15px;letter-spacing:-.25px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:4px}.side-section{padding:15px 0;border-top:1px solid var(--line)}.section-title{font-size:10px;letter-spacing:1.3px;font-weight:750;color:var(--muted);text-transform:uppercase;margin:0 0 10px}.row{display:flex;gap:7px;align-items:center}.row>*{flex:1}.module{display:flex;background:#f0f3f8;padding:3px;border-radius:8px;gap:3px}.module button{padding:8px 7px;font-size:11px;flex:1;border:0;background:transparent}.module button.active{background:white;box-shadow:0 1px 5px #1c2e4414;color:var(--blue)}.full{width:100%}.file-name{font-size:11px;color:var(--muted);margin:8px 0 0;overflow-wrap:anywhere}.filter-box{border:1px solid var(--line);border-radius:8px;margin-top:9px;overflow:hidden}.filter-box>summary{padding:10px 11px;font-size:12px;list-style:none;display:flex;justify-content:space-between;align-items:center}.filter-box>summary:after{content:'⌄';color:var(--muted)}.filter-box[open]>summary{background:#f5f7fb}.filter-count{font-size:10px;color:var(--muted);margin-left:auto;margin-right:8px}.filter-inside{padding:9px}.filter-inside input[type=search]{width:100%;font-size:11px;padding:7px}.mini-actions{display:flex;gap:8px;margin:7px 0}.mini-actions button{border:0;background:#eff3ff;color:var(--blue);font-size:10px;min-height:26px;padding:4px 9px}.check-list{max-height:172px;overflow:auto}.check-item{display:flex;gap:8px;align-items:flex-start;padding:6px 2px;font-size:12px;cursor:pointer}.check-item input{margin-top:2px;flex-shrink:0}.check-item span{overflow-wrap:anywhere}.check-item.is-hidden{opacity:.5}.short-search{width:100%;padding:8px;font-size:12px}.quiet{color:var(--muted);font-size:11px;background:none;border:0;padding:5px 0;min-height:26px}.field{display:block;font-size:11px;color:var(--muted);margin:9px 0}.field input,.field select{display:block;width:100%;margin-top:4px;font-size:12px;padding:7px}.compact-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:14px}.stat{background:#f5f7fb;border:1px solid #edf0f5;border-radius:7px;padding:8px}.stat strong{display:block;font-size:19px;font-weight:650;line-height:1.2;font-variant-numeric:tabular-nums}.stat span{font-size:9px;color:var(--muted)}.stat.alert{background:#fff5f5}.stat.alert strong{color:var(--red)}.saved-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid #edf0f5;font-size:11px}.saved-item span{min-width:0;overflow-wrap:anywhere}.saved-item small{display:block;color:var(--muted);font-size:10px}.icon-button{flex:none;padding:3px 7px;min-height:26px;font-size:13px}.saved-section{margin-top:10px}.saved-section summary{font-size:11px;cursor:pointer;color:var(--muted)}main{margin-left:290px;padding:27px 28px;min-width:0}.report-head{display:flex;align-items:baseline;gap:12px;justify-content:space-between;margin-bottom:16px}h1{font-size:21px;font-weight:650;letter-spacing:-.5px;margin:0}h2{font-size:16px;letter-spacing:-.2px;margin:0}.meta{color:var(--muted);font-size:11px}.panel{border:1px solid var(--line);background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 5px #17304e03}.scroll-table{overflow:auto;max-height:calc(100vh - 150px)}table{width:100%;border-collapse:collapse;font-size:12px}th{background:#f3f6fb;color:#61718a;text-align:right;font-size:10px;font-weight:650;padding:13px 14px;position:sticky;top:0;z-index:1;min-width:102px;border-bottom:1px solid var(--line)}td{text-align:right;padding:13px 14px;border-bottom:1px solid #edf0f4;font-variant-numeric:tabular-nums;white-space:nowrap}th:first-child,th:nth-child(2),td:first-child,td:nth-child(2){text-align:left}tbody tr:nth-child(even){background:#fcfdff}tbody tr:hover{background:#f1f5ff}tfoot td{position:sticky;bottom:0;font-weight:700;background:#edf2fa;border-top:1px solid #d2dceb}td:first-child{font-weight:600}.badge{font-size:9px;color:#4964a4;background:#edf2ff;padding:2px 5px;border-radius:4px;margin-left:7px}.empty-cell{text-align:center!important;padding:45px;color:var(--muted);font-weight:400!important}.flags-section{margin-top:25px}.flags-head{display:flex;align-items:center;gap:9px;margin-bottom:12px}.count-badge{background:#fee8eb;color:#a32d3d;border-radius:14px;padding:3px 8px;font-size:11px;font-weight:700}.flags-panel{border-color:#efd6db}.flags-panel th{background:#fff1f3;color:#944452}.flags-panel td{text-align:left;font-size:11px}.flags-panel th{text-align:left}.flags-panel .scroll-table{max-height:360px}.reason{border-radius:4px;background:#fff0f2;color:#aa3547;font-size:10px;padding:3px 7px}#status{font-size:11px;margin:9px 0 0;color:var(--blue);overflow-wrap:anywhere}#status.error{color:var(--red)}#status:empty{display:none}dialog{border:1px solid var(--line);border-radius:14px;max-width:560px;width:calc(100% - 32px);padding:24px;color:var(--ink);box-shadow:0 25px 80px #16254040;max-height:90vh;overflow:auto}dialog::backdrop{background:#18294166}.dialog-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.mode-buttons{display:flex;gap:8px;margin-bottom:12px}.mode-buttons label{flex:1;border:1px solid var(--line);padding:10px;border-radius:7px;font-size:12px;cursor:pointer}.mode-buttons label:has(input:checked){background:#edf2ff;border-color:#9bb1ed;color:var(--blue)}dialog .check-list{max-height:230px;min-height:90px;margin:10px 0;border:1px solid var(--line);border-radius:7px;padding:7px}.dialog-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.preview{font-size:12px;background:#f4f7fc;border-radius:7px;padding:10px;margin-top:10px}.preview:empty{display:none}.preview small{display:block;margin-top:4px;color:var(--muted)}.mobile-toggle{display:none}.sort-label{font-size:10px;color:var(--muted)}@media(min-width:1700px){main{padding:32px 38px}}@media(max-width:850px){.sidebar{width:255px;padding:18px 14px}main{margin-left:255px;padding:20px 16px}th,td{padding:11px 10px}.report-head{flex-wrap:wrap}}@media(max-width:620px){.mobile-toggle{display:block;position:fixed;top:10px;left:10px;z-index:8;background:#192e50;color:white;border:0}.sidebar{transform:translateX(-100%);transition:transform .15s;width:285px;padding-top:56px;box-shadow:8px 0 30px #16243c20}.sidebar.open{transform:none}main{margin-left:0;padding:60px 12px 20px}.report-head{gap:7px}h1{font-size:18px}.scroll-table{max-height:65vh}}@media print{.sidebar,.mobile-toggle{display:none}main{margin:0;padding:0}.scroll-table{max-height:none!important;overflow:visible}.panel{border-radius:0}th,tfoot td{position:static}}
+.sidebar{background:#16243b;color:#e1e9f6;border-color:#26384f}.sidebar .brand strong{color:#fff}.sidebar .brand small,.sidebar .section-title,.sidebar .file-name,.sidebar .field,.sidebar .quiet,.sidebar .saved-section summary,.sidebar .saved-item small,.sidebar .filter-count{color:#a9bad2}.sidebar .logo{background:#365fe0}.sidebar .side-section{border-color:#304058}.sidebar .module{background:#101c30}.sidebar .module button{color:#b8c9e1}.sidebar .module button.active{background:#345ddb;color:white}.sidebar button{background:#273a56;border-color:#3e5372;color:#edf3ff}.sidebar button:hover{background:#344c6f}.sidebar button.primary{background:#365fe0;border-color:#365fe0}.sidebar input,.sidebar select{background:#1e304c;color:#edf3ff;border-color:#3e5372}.sidebar input::placeholder{color:#a2b3cd}.sidebar input[type=date]{color-scheme:dark}.sidebar .filter-box{border-color:#3e5372}.sidebar .filter-box[open]>summary{background:#253853}.sidebar .mini-actions button{background:#30476a;color:#d9e5ff}.sidebar .stat{background:#20334f;border-color:#30425d}.sidebar .stat span{color:#aec0d9}.sidebar .stat.alert{background:#3f2837}.sidebar .stat.alert strong{color:#ffb4c0}.sidebar .saved-item{border-color:#304058;min-width:0}.saved-item>span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}.saved-item small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.saved-item>.icon-button{flex:0 0 27px}.sidebar #status{color:#aac4ff}.sidebar #status.error{color:#ffb0bb}.sidebar .quiet{background:transparent;border:0}.reset-all{margin-top:12px!important}.flags-section{margin-top:0}.flags-panel .scroll-table{max-height:calc(100vh - 110px)}.pair-list{max-height:340px!important}.sidebar input[type=checkbox]{accent-color:#7d9cff}.sidebar{scrollbar-color:#637895 #16243b}dialog{color-scheme:light}
+.sidebar .module{display:grid;grid-template-columns:1fr 1fr}.sidebar #client-filter{border-color:#5668aa}.sidebar #client-filter>summary{background:#303e70;color:#e0e7ff}.sidebar #location-filter{border-color:#3c8b83}.sidebar #location-filter>summary{background:#1d4c4c;color:#d5fff5}.sidebar #client-filter .filter-count,.sidebar #location-filter .filter-count{color:#dae7f7}.export-tools{display:flex;justify-content:flex-end;gap:8px;margin-bottom:14px}.export-tools .full{width:auto}.export-tools button{margin-top:0!important}.source-module{max-width:700px;background:white;padding:28px;border:1px solid var(--line);border-radius:12px}.source-module .row{max-width:350px}.source-module .file-name{margin-top:18px}.header-sort{border:0;background:transparent;color:inherit;padding:0;min-height:24px;text-align:left;font:inherit;white-space:nowrap}.header-sort:hover{background:#ffe1e7}.header-sort span{margin-left:5px}.action-col{min-width:40px;width:40px}.row-remove{border:0;background:#fff0f2;color:#a92f42;min-height:25px;padding:2px 8px;font-size:16px}.locked{background:#e8f6ef;color:#247550}.drop-ready{outline:3px dashed var(--blue);outline-offset:3px}.draggable-item{cursor:grab}.draggable-item:active{cursor:grabbing}.sidebar .draggable-item:hover{color:white;text-decoration:underline}#report-table td:last-child{width:40px;padding:6px}#status{margin:10px 0}.source-module .section-title{font-size:18px;letter-spacing:0;text-transform:none;color:var(--ink)}
+.source-module{max-width:none;width:100%;min-height:calc(100vh - 60px);padding:32px}.source-title{font-size:24px;margin:0 0 26px}.source-module .row{max-width:370px}.source-module .row button{min-height:42px}.source-module .file-name{font-size:13px;padding:18px;background:#f4f7fc;border:1px solid var(--line);border-radius:8px;max-width:760px}@media(max-width:620px){.source-module{min-height:calc(100vh - 80px);padding:22px}}
+#report-table .action-col{min-width:122px;width:122px}#report-table .row-actions{white-space:nowrap;text-align:left;padding:8px;position:sticky;left:0;background:#fff;z-index:1}#report-table .row-actions input{vertical-align:middle;margin-right:7px}#report-table .row-hide{padding:3px 7px;min-height:25px;font-size:10px;margin-left:5px}#report-table th:nth-child(3),#report-table td:nth-child(3){text-align:left}#report-table td:nth-child(2){font-weight:600}#report-table td:last-child{width:auto;padding:13px 14px}.export-tools{align-items:center;flex-wrap:wrap}#merge-rows{margin-right:auto}#row-selection-count{font-size:11px;color:var(--muted)}
+.sidebar #client-filter{background:#f0f3ff;border-color:#a6b8ee;color:#21355d}.sidebar #client-filter>summary{background:#dce5fc;color:#203866}.sidebar #location-filter{background:#edf8f5;border-color:#8ac8bb;color:#174b43}.sidebar #location-filter>summary{background:#d2eee6;color:#194d42}.sidebar #client-filter .filter-count,.sidebar #location-filter .filter-count{color:#4b6276}.sidebar .filter-box>summary:after{color:#496078}.sidebar .filter-box input[type=search]{background:#fff;color:#20324d;border-color:#b6c5df}.sidebar .filter-box input[type=search]::placeholder{color:#61738b}.sidebar .filter-box .mini-actions button{background:#dce5fb;color:#244b9a;border:1px solid #bdcff4}.sidebar #location-filter .mini-actions button{background:#d0ebe3;color:#215c4d;border-color:#a1d0c2}.sidebar .filter-box .mini-actions button:hover{filter:brightness(.95)}.sidebar .filter-box .check-item:hover{background:#dde7fa;border-radius:5px}.sidebar #location-filter .check-item:hover{background:#d4eee5}.sidebar .filter-box .draggable-item:hover{color:#21478a}.sidebar #location-filter .draggable-item:hover{color:#175841}.sidebar .filter-box input[type=checkbox]{accent-color:#315ee7}.sidebar #location-filter input[type=checkbox]{accent-color:#26846d}.sidebar .filter-box .check-list{scrollbar-color:#acbdd7 transparent}
+</style></head><body><button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle controls" aria-expanded="false">☰</button><aside class="sidebar" id="sidebar"><div class="brand"><div class="logo" aria-label="JK logo">JK</div><div><strong>Division Reporting by JK</strong><small>Version 3.6</small></div></div>
+<div class="module" role="group" aria-label="Report module"><button id="module-ns" class="active" aria-pressed="true">North / SE / SC</button><button id="module-west" aria-pressed="false">West</button><button id="module-flags" aria-pressed="false">Red flags</button><button id="module-source" aria-pressed="false">Data source</button></div>
+<button id="reset-all" class="full reset-all">Clear all filters</button><div id="status" role="status" aria-live="polite"></div><div class="compact-stats" id="stats"></div>
+<div class="side-section" id="report-dates"><h3 class="section-title">Reporting dates</h3><div id="ns-dates"><label class="field">Schedules<input id="schedule-date" type="date"></label><label class="field">Interviews<input id="interview-date" type="date"></label></div><div id="west-dates" hidden><label class="field">Week ending<input id="week-end" type="date"></label></div></div>
+<div class="side-section" id="report-filters"><h3 class="section-title">Filters · shared</h3><input class="short-search" type="search" id="search" placeholder="Search report" aria-label="Search report"><div id="dimension-filters"></div><button class="quiet" id="reset-filters">Reset filters</button><button id="add-report" class="full" style="margin:4px 0 8px">Add to report</button><div class="row"><button id="merge" class="primary">Merge</button><button id="hide">Hide</button></div><details class="saved-section"><summary id="added-summary">Individual rows · 0</summary><div id="added-list"></div></details><details class="saved-section"><summary id="groups-summary">Groups · 0</summary><div id="groups-list"></div></details><details class="saved-section"><summary id="hidden-summary">Hidden · 0</summary><div id="hidden-list"></div></details></div>
+<div class="side-section" id="flag-controls"><details open><summary class="section-title">Red flags</summary><label class="field">Recruiter<select id="recruiter"><option value="">All recruiters</option></select></label><label class="field">Date field<select id="flag-date-field"><option value="dateAdded">Date added</option><option value="apptDate">Appointment date</option></select></label><div class="row"><label class="field">From<input id="flag-from" type="date"></label><label class="field">To<input id="flag-to" type="date"></label></div><label class="field">Sort by<select id="flag-sort"><option value="recruiter">Recruiter A–Z</option><option value="candidate">Candidate A–Z</option><option value="client">Client A–Z</option><option value="location">Location A–Z</option><option value="dateDesc">Date · newest first</option><option value="dateAsc">Date · oldest first</option></select></label><button id="reset-flags" class="quiet">Reset red flag filters</button></details></div>
+</aside><main><section id="source-body" class="source-module" hidden><h1 class="source-title">Data source</h1><div class="row"><button class="primary" id="upload">Upload Excel</button><button id="remove">Remove</button></div><input type="file" id="file" accept=".xlsx,.xls" hidden><div class="file-name" id="file-name">No file loaded</div></section><div id="export-tools" class="export-tools"><button id="merge-rows" class="primary" disabled>Merge selected</button><span id="row-selection-count"></span><button id="show-flags" hidden>Show red flags</button><label class="field">Data<select id="export-target"><option value="report">Current report</option><option value="flags">Filtered red flags</option></select></label><button id="download" class="full">Download Excel</button><button id="copy" class="full" style="margin-top:7px">Copy to clipboard</button></div>
+<div class="report-head" id="report-head"><h1 id="report-title">North / SE / SC</h1><span class="meta" id="report-meta"></span></div><div class="panel" id="report-panel"><div class="scroll-table" tabindex="0" role="region" aria-label="Report data"><table id="report-table"><thead></thead><tbody></tbody><tfoot></tfoot></table></div></div><section class="flags-section" id="flags-body" hidden><div class="flags-head"><h2>Red flags</h2><span class="count-badge" id="flag-count">0</span></div><div class="panel flags-panel"><div class="scroll-table" tabindex="0" role="region" aria-label="Red flag data"><table id="flag-table"><thead></thead><tbody></tbody></table></div></div></section></main>
+<script>
+'use strict';
+const VERSION='v3.6';
+const NS_HEADERS=['Client','Location','Pending onboarding','Schedules for today','Interviews today','Total schedules','Total pipeline'];
+const WEST_HEADERS=['Client','Location','Pending onboarding','Schedule in branch','Pipeline (Available/OAE)','Pipeline (Unavailable/Inactive)'];
+const FLAG_HEADERS=['Recruiter','Candidate','EID','Client','Location','Branch Schedule?','Appointment date','Why'];
+function localDay(d){return d instanceof Date&&!isNaN(d)?d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'):'';}
+function parseDay(v){
+ if(v instanceof Date)return isNaN(v)?'':v.getUTCFullYear()+'-'+String(v.getUTCMonth()+1).padStart(2,'0')+'-'+String(v.getUTCDate()).padStart(2,'0');
+ if(typeof v==='number'){const d=new Date(Date.UTC(1899,11,30)+Math.floor(v)*86400000);return d.toISOString().slice(0,10);}
+ if(typeof v!=='string'||!v.trim())return '';
+ const s=v.trim(),iso=s.match(/^(\d{4})-(\d{2})-(\d{2})$/);if(iso)return s;
+ return localDay(new Date(s));
+}
+function normalizeLocation(v){let s=String(v||'').trim().replace(/\s+/g,' ').replace(/\s*,\s*/g,', ');if(!s.includes(','))s=s.replace(/^(.*\S)\s+([A-Za-z]{2})$/,(_,a,b)=>a+', '+b.toUpperCase());else s=s.replace(/,\s*([A-Za-z]{2})$/,(_,b)=>', '+b.toUpperCase());return s;}
+function visibleRecords(data,state){
+ const clients=new Set(state.clients),locations=new Set(state.locations),hc=new Set(state.hiddenClients),hl=new Set(state.hiddenLocations),q=state.search.trim().toLowerCase();
+ const added=new Set(state.addedPairs||[]),removed=new Set([...(state.removedPairs||[]),...(state.hiddenPairs||[])]);
+ return data.filter(r=>!removed.has(JSON.stringify([r.client,r.location]))&&(added.has(JSON.stringify([r.client,r.location]))||(clients.has(r.client)&&locations.has(r.location)&&!hc.has(r.client)&&!hl.has(r.location)&&(!q||(r.client+' '+r.location).toLowerCase().includes(q)))));
+}
+function groupMap(groups){const map=new Map();groups.forEach(g=>g.members.forEach(m=>map.set(m,g)));return map;}
+function groupedReport(records,state){
+ const cm=groupMap(state.clientGroups),lm=groupMap(state.locationGroups),buckets=new Map(),rowMap=new Map();
+ (state.rowGroups||[]).forEach(g=>g.pairs.forEach(p=>rowMap.set(p,g)));
+ const end=new Date(state.weekEnd+'T12:00:00'),start=new Date(end);start.setDate(start.getDate()-6);const from=localDay(start);
+ records.forEach(r=>{
+  const single=(state.addedPairs||[]).includes(JSON.stringify([r.client,r.location]));
+  const rg=rowMap.get(JSON.stringify([r.client,r.location]));
+  const c=single?null:cm.get(r.client),l=single?null:lm.get(r.location),key=rg?JSON.stringify(['row',rg.id]):JSON.stringify([c?['g',c.id]:['v',r.client],l?['g',l.id]:['v',r.location]]);
+  if(!buckets.has(key))buckets.set(key,{client:rg?rg.clientLabel:(c?c.name:r.client),location:rg?rg.locationLabel:(l?l.name:r.location),counts:Array(state.module==='west'?4:5).fill(0),ids:[],pairs:new Set()});
+  const b=buckets.get(key);b.ids.push(r.id);b.pairs.add(JSON.stringify([r.client,r.location]));
+  if(state.module==='west'){
+   if(!r.dateAdded||r.dateAdded<from||r.dateAdded>state.weekEnd)return;
+   if(r.onboardingStage!=='EB Complete/I9 Complete')b.counts[0]++;
+   if(r.branchSchedule==='Yes')b.counts[1]++;
+   if(['Available','OAE'].includes(r.ebStatusReason))b.counts[2]++;
+   if(['Unavailable','Inactive'].includes(r.ebStatusReason))b.counts[3]++;
+  }else{
+   if(r.onboardingStage!=='EB Complete/I9 Complete')b.counts[0]++;
+   if(r.branchSchedule==='Yes'&&r.dateAdded===state.scheduleDate)b.counts[1]++;
+   if(r.apptDate&&r.apptDate===state.interviewDate)b.counts[2]++;
+   if(r.branchSchedule==='Yes')b.counts[3]++;
+   b.counts[4]++;
+  }
+ });
+ const result=Array.from(buckets.values());result.sort((a,b)=>a.location.localeCompare(b.location)||a.client.localeCompare(b.client));
+ return {rows:result,totals:result.reduce((t,b)=>t.map((n,i)=>n+b.counts[i]),Array(state.module==='west'?4:5).fill(0))};
+}
+function redFlags(records,filters){
+ const result=records.filter(r=>((r.branchSchedule==='Yes'&&!r.apptDate)||(r.apptDate&&(r.branchSchedule==='No'||!r.branchSchedule)))&&(!filters.recruiter||r.recruiter===filters.recruiter)&&(!filters.from||(r[filters.dateField]&&r[filters.dateField]>=filters.from))&&(!filters.to||(r[filters.dateField]&&r[filters.dateField]<=filters.to)));
+ const field=filters.sort==='dateAsc'||filters.sort==='dateDesc'?filters.dateField:filters.sort;
+ result.sort((a,b)=>{
+  if(field==='dateAdded'||field==='apptDate'){
+   if(!a[field]&&b[field])return 1;if(a[field]&&!b[field])return -1;
+   const n=(a[field]||'').localeCompare(b[field]||'');return (filters.sort==='dateDesc'?-n:n)||(a.candidate||'').localeCompare(b.candidate||'');
+  }
+  return (a[field]||'').localeCompare(b[field]||'')||(a.candidate||'').localeCompare(b.candidate||'');
+ });if(filters.headerKey){
+ const get=r=>filters.headerKey==='reason'?(r.branchSchedule==='Yes'?'Yes, no date':'Dated, not Yes'):(r[filters.headerKey]||'');
+ result.sort((a,b)=>{const av=String(get(a)),bv=String(get(b));if(!av&&bv)return 1;if(av&&!bv)return -1;return av.localeCompare(bv,undefined,{numeric:filters.headerKey==='eid'})*(filters.direction==='desc'?-1:1)||(a.candidate||'').localeCompare(b.candidate||'');});
+ }
+return result;
+}
+function replaceDimensionGroup(groups,members,name,id){
+ const picked=new Set(members);
+ if(picked.size<2)return groups;
+ // Membership is exclusive within a dimension; an item cannot count in two groups.
+ const kept=groups.map(g=>({...g,members:g.members.filter(m=>!picked.has(m))})).filter(g=>g.members.length>=2);
+ return [...kept,{id,name:name.trim()||Array.from(picked).join(' / '),members:Array.from(picked)}];
+}
+function toTSV(matrix){return matrix.map(row=>row.map(v=>{let s=String(v??'').replace(/[\r\n\t]+/g,' ');return typeof v==='string'&&/^[=+@-]/.test(s)?"'"+s:s;}).join('\t')).join('\n');}
+
+function contextualValues(data,state,kind){
+ const opposite=new Set(kind==='client'?state.locations:state.clients),hidden=new Set(kind==='client'?state.hiddenClients:state.hiddenLocations),otherHidden=new Set(kind==='client'?state.hiddenLocations:state.hiddenClients);
+ return Array.from(new Set(data.filter(r=>opposite.has(kind==='client'?r.location:r.client)&&!otherHidden.has(kind==='client'?r.location:r.client)&&!hidden.has(kind==='client'?r.client:r.location)).map(r=>kind==='client'?r.client:r.location))).sort();
+}
+
+function dragReportPairs(data,kind,members,opposite){
+ const picked=new Set(members),scope=new Set(opposite);
+ return Array.from(new Set(data.filter(r=>picked.has(kind==='client'?r.client:r.location)&&(!scope.size||scope.has(kind==='client'?r.location:r.client))).map(r=>JSON.stringify([r.client,r.location]))));
+}
+
+(function(){
+const $=id=>document.getElementById(id), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const DATA_KEY='divisionReporting.JK.data.v3',STATE_KEY='divisionReporting.JK.view.v3';
+let data=[],fileName='',allClients=[],allLocations=[],report={rows:[],totals:[]},flags=[];
+function fresh(){const today=localDay(new Date());return {module:'ns',addedPairs:[],removedPairs:[],hiddenPairs:[],rowGroups:[],flagsEnabled:false,clients:[],locations:[],hiddenClients:[],hiddenLocations:[],clientGroups:[],locationGroups:[],search:'',scheduleDate:today,interviewDate:today,weekEnd:today,flags:{recruiter:'',dateField:'dateAdded',from:'',to:'',sort:'recruiter'}}}
+let state=fresh();
+function status(text,error=false){$('status').textContent=text;$('status').classList.toggle('error',error)}
+function save(){try{localStorage.setItem(STATE_KEY,JSON.stringify(state))}catch(e){status('View could not be saved in this browser.',true)}}
+function saveData(){try{localStorage.setItem(DATA_KEY,JSON.stringify({rows:data,fileName}))}catch(e){status('File loaded. Browser storage is full; this file is not saved.',true)}}
+function matrix(){return state.module==='west'?WEST_HEADERS:NS_HEADERS}
+function flagMatrix(){return [FLAG_HEADERS,...flags.map(r=>[r.recruiter||'—',r.candidate||'—',r.eid||'—',r.client,r.location,r.branchSchedule||'Blank',r.apptDate||'—',r.branchSchedule==='Yes'?'Yes, no date':'Dated, not Yes'])]}
+function reportMatrix(){return [matrix(),...report.rows.map(r=>[r.client,r.location,...r.counts]),['Total','',...report.totals]]}
+function updateLists(){
+ allClients=Array.from(new Set(data.map(r=>r.client))).sort();allLocations=Array.from(new Set(data.map(r=>r.location))).sort();
+ $('file-name').textContent=fileName?fileName+' · '+data.length.toLocaleString()+' records':'No file loaded';
+ const recruiters=Array.from(new Set(data.map(r=>r.recruiter).filter(Boolean))).sort();$('recruiter').innerHTML='<option value="">All recruiters</option>'+recruiters.map(n=>'<option value="'+esc(n)+'">'+esc(n)+'</option>').join('');
+ if(!recruiters.includes(state.flags.recruiter))state.flags.recruiter='';
+ buildFilters();syncControls();
+}
+function syncControls(){
+ $('search').value=state.search;$('schedule-date').value=state.scheduleDate;$('interview-date').value=state.interviewDate;$('week-end').value=state.weekEnd;
+ $('recruiter').value=state.flags.recruiter;$('flag-date-field').value=state.flags.dateField;$('flag-from').value=state.flags.from;$('flag-to').value=state.flags.to;$('flag-sort').value=state.flags.sort;
+}
+function buildFilters(){
+ $('dimension-filters').innerHTML='';
+ ['client','location'].forEach(kind=>{
+  const box=document.createElement('details');box.className='filter-box';box.id=kind+'-filter';box.innerHTML='<summary>'+ (kind==='client'?'Clients':'Locations')+'<span class="filter-count"></span></summary><div class="filter-inside"><input type="search" placeholder="Search '+kind+'s" aria-label="Search '+kind+'s"><div class="mini-actions"><button type="button" data-all>Select all</button><button type="button" data-none>Clear</button></div><div class="check-list"></div></div>';
+  $('dimension-filters').append(box);box.querySelector('input[type=search]').oninput=()=>paintFilter(kind);
+  box.querySelector('[data-all]').onclick=()=>{state[kind+'s']=[...(kind==='client'?allClients:allLocations)];paintFilter(kind);render()};
+  box.querySelector('[data-none]').onclick=()=>{state[kind+'s']=[];box.querySelector('input[type=search]').value='';paintFilter(kind);render()};paintFilter(kind);
+ });
+}
+function paintFilter(kind){
+ const box=$(kind+'-filter');if(!box)return;
+ const values=kind==='client'?allClients:allLocations,key=kind+'s',chosen=new Set(state[key]),hidden=new Set(state[kind==='client'?'hiddenClients':'hiddenLocations']),groups=state[kind+'Groups'];
+ box.querySelector('.filter-count').textContent=values.filter(v=>chosen.has(v)&&!hidden.has(v)).length+'/'+values.length;
+ const term=box.querySelector('input[type=search]').value.toLowerCase(),list=box.querySelector('.check-list');list.innerHTML='';
+ function checkbox(name,members,isGroup){
+  const available=members.filter(m=>!hidden.has(m)),checked=available.filter(m=>chosen.has(m)).length;
+  const label=document.createElement('label');label.className='check-item'+(!available.length?' is-hidden':'');const cb=document.createElement('input');cb.type='checkbox';cb.checked=!!available.length&&checked===available.length;cb.indeterminate=checked>0&&checked<available.length;cb.disabled=!available.length;
+  const span=document.createElement('span');span.textContent=name+(isGroup?' · group':'');label.append(cb,span);list.append(label);span.draggable=true;span.classList.add('draggable-item');span.title='Drag to report';span.ondragstart=e=>{e.dataTransfer.setData('application/x-jk-report',JSON.stringify({kind,members:available}));e.dataTransfer.effectAllowed='copy'};
+  cb.onchange=()=>{const next=new Set(state[key]);available.forEach(v=>cb.checked?next.add(v):next.delete(v));state[key]=Array.from(next);paintFilter(kind);render()};
+ }
+ groups.filter(g=>(g.name+' '+g.members.join(' ')).toLowerCase().includes(term)).forEach(g=>checkbox(g.name,g.members,true));
+ values.filter(v=>v.toLowerCase().includes(term)).forEach(v=>checkbox(v,[v],false));
+}
+function paintSaved(){
+ const added=$('added-list');added.innerHTML='';$('added-summary').textContent='Individual rows · '+state.addedPairs.length;
+ state.addedPairs.forEach(key=>{const pair=JSON.parse(key),item=document.createElement('div');item.className='saved-item';const text=document.createElement('span');text.textContent=pair.join(' · ');text.title=text.textContent;const remove=document.createElement('button');remove.className='icon-button';remove.textContent='×';remove.setAttribute('aria-label','Remove added row '+text.textContent);remove.onclick=()=>{removeReportPairs([key])};item.append(text,remove);added.append(item)});
+
+ const list=$('groups-list');list.innerHTML='';const total=state.clientGroups.length+state.locationGroups.length+state.rowGroups.length;$('groups-summary').textContent='Groups · '+total;
+ ['client','location'].forEach(kind=>state[kind+'Groups'].forEach(g=>{
+  const item=document.createElement('div');item.className='saved-item';const text=document.createElement('span');text.textContent=g.name;text.title=g.name;const sub=document.createElement('small');sub.textContent=g.members.length+' '+kind+'s';text.append(sub);const button=document.createElement('button');button.className='icon-button';button.textContent='×';button.title='Ungroup';button.setAttribute('aria-label','Ungroup '+g.name);button.onclick=()=>{state[kind+'Groups']=state[kind+'Groups'].filter(x=>x.id!==g.id);refresh()};item.append(text,button);list.append(item);
+ }));
+ state.rowGroups.forEach(g=>{const item=document.createElement('div');item.className='saved-item';const text=document.createElement('span');text.textContent=g.clientLabel+' · '+g.locationLabel;text.title=text.textContent;const button=document.createElement('button');button.className='icon-button';button.textContent='×';button.title='Ungroup rows';button.onclick=()=>{state.rowGroups=state.rowGroups.filter(x=>x.id!==g.id);refresh()};item.append(text,button);list.append(item)});
+ if(total){const clear=document.createElement('button');clear.className='quiet';clear.textContent='Ungroup all';clear.onclick=()=>{state.clientGroups=[];state.locationGroups=[];state.rowGroups=[];refresh()};list.append(clear)}
+ const hidden=$('hidden-list');hidden.innerHTML='';let count=0;
+ ['client','location'].forEach(kind=>{const key=kind==='client'?'hiddenClients':'hiddenLocations';state[key].forEach(v=>{count++;const item=document.createElement('div');item.className='saved-item';const span=document.createElement('span');span.textContent=v;span.title=v;const button=document.createElement('button');button.className='icon-button';button.textContent='↶';button.title='Show';button.setAttribute('aria-label','Show '+v);button.onclick=()=>{state[key]=state[key].filter(x=>x!==v);if(!state[kind+'s'].includes(v))state[kind+'s'].push(v);refresh()};item.append(span,button);hidden.append(item)})});
+ state.hiddenPairs.forEach(key=>{count++;const item=document.createElement('div');item.className='saved-item';const text=document.createElement('span');text.textContent=JSON.parse(key).join(' · ');text.title=text.textContent;const show=document.createElement('button');show.className='icon-button';show.textContent='↶';show.title='Show row';show.onclick=()=>{state.hiddenPairs=state.hiddenPairs.filter(p=>p!==key);lockReportPairs([key])};item.append(text,show);hidden.append(item)});
+ $('hidden-summary').textContent='Hidden · '+count;
+ if(count){const show=document.createElement('button');show.className='quiet';show.textContent='Show all hidden';show.onclick=()=>{state.clients=Array.from(new Set([...state.clients,...state.hiddenClients]));state.locations=Array.from(new Set([...state.locations,...state.hiddenLocations]));state.hiddenClients=[];state.hiddenLocations=[];state.addedPairs=Array.from(new Set([...state.addedPairs,...state.hiddenPairs]));state.hiddenPairs=[];refresh()};hidden.append(show)}
+}
+function refresh(){paintFilter('client');paintFilter('location');paintSaved();render()}
+function render(){
+ const records=visibleRecords(data,state);report=groupedReport(records,state);flags=state.flagsEnabled?redFlags(data,state.flags):[];
+ $('merge-rows').disabled=true;$('row-selection-count').textContent='';
+ const headers=matrix();$('report-table').querySelector('thead').innerHTML='<tr><th class="action-col" aria-label="Select, remove or hide rows"></th>'+headers.map(h=>'<th scope="col">'+esc(h)+'</th>').join('')+'</tr>';
+ $('report-table').querySelector('tbody').innerHTML=report.rows.length?report.rows.map((r,index)=>'<tr><td class="row-actions"><input type="checkbox" data-select-row="'+index+'" aria-label="Select row '+(index+1)+'"><button class="row-remove" data-row="'+index+'" aria-label="Remove row" title="Remove row">×</button><button class="row-hide" data-hide-row="'+index+'" title="Hide row" aria-label="Hide row">Hide</button></td><td>'+esc(r.client)+'</td><td>'+esc(r.location)+(r.pairs.size>1?'<span class="badge">merged</span>':'')+(Array.from(r.pairs).some(p=>state.addedPairs.includes(p))?'<span class="badge locked">locked</span>':'')+'</td>'+r.counts.map(n=>'<td>'+n.toLocaleString()+'</td>').join('')+'</tr>').join(''):'<tr><td class="empty-cell" colspan="'+(headers.length+1)+'">'+(data.length?'No matching data':'No file loaded')+'</td></tr>';
+ $('report-table').querySelector('tfoot').innerHTML=report.rows.length?'<tr><td></td><td>Total</td><td></td>'+report.totals.map(n=>'<td>'+n.toLocaleString()+'</td>').join('')+'</tr>':'';
+ $('report-table').querySelectorAll('[data-row]').forEach(button=>button.onclick=()=>removeReportPairs(Array.from(report.rows[Number(button.dataset.row)].pairs)));
+ $('report-table').querySelectorAll('[data-select-row]').forEach(cb=>cb.onchange=()=>{const count=$('report-table').querySelectorAll('[data-select-row]:checked').length;$('merge-rows').disabled=count<2;$('row-selection-count').textContent=count?count+' selected':''});
+ $('report-table').querySelectorAll('[data-hide-row]').forEach(button=>button.onclick=()=>{const pairs=Array.from(report.rows[Number(button.dataset.hideRow)].pairs);state.hiddenPairs=Array.from(new Set([...state.hiddenPairs,...pairs]));refresh();status('Row hidden')});
+ const fm=flagMatrix();$('flag-table').querySelector('thead').innerHTML='<tr>'+FLAG_HEADERS.map((h,i)=>{const key=['recruiter','candidate','eid','client','location','branchSchedule','apptDate','reason'][i];const active=state.flags.headerKey===key;return '<th scope="col" aria-sort="'+(active?(state.flags.direction==='desc'?'descending':'ascending'):'none')+'"><button class="header-sort" data-key="'+key+'">'+esc(h)+' <span>'+(active?(state.flags.direction==='desc'?'↓':'↑'):'↕')+'</span></button></th>'}).join('')+'</tr>';
+ $('flag-table').querySelector('tbody').innerHTML=flags.length?fm.slice(1).map(row=>'<tr>'+row.map((v,i)=>'<td>'+(i===7?'<span class="reason">'+esc(v)+'</span>':esc(v))+'</td>').join('')+'</tr>').join(''):'<tr><td colspan="8" class="empty-cell">No red flags</td></tr>';
+ $('flag-table').querySelectorAll('[data-key]').forEach(button=>button.onclick=()=>{const key=button.dataset.key;state.flags.direction=state.flags.headerKey===key&&state.flags.direction!=='desc'?'desc':'asc';state.flags.headerKey=key;render()});
+ $('flag-count').textContent=flags.length.toLocaleString();
+ const stats=[['Rows',report.rows.length],['Clients',new Set(records.map(r=>r.client)).size],['Locations',new Set(records.map(r=>r.location)).size],['Schedules',state.module==='west'?report.totals[1]:report.totals[1]],['Interviews',records.filter(r=>r.apptDate&&r.apptDate===state.interviewDate).length],['Red flags',flags.length]];
+ $('stats').innerHTML=stats.map(([name,n])=>'<div class="stat'+(name==='Red flags'?' alert':'')+'"><strong>'+n.toLocaleString()+'</strong><span>'+name+'</span></div>').join('');
+ if(state.module==='west'){$('stats').children[4].innerHTML='<strong>'+((report.totals[2]||0)+(report.totals[3]||0)).toLocaleString()+'</strong><span>Pipeline</span>'}
+ $('report-title').textContent=state.module==='west'?'West · Weekly report':'North / SE / SC';
+ $('report-meta').textContent=records.length.toLocaleString()+' records · '+report.rows.length+' rows'+(state.module==='west'?' · Week ending '+state.weekEnd:'');
+ $('ns-dates').hidden=state.module==='west';$('west-dates').hidden=state.module!=='west';
+ ['ns','west','flags','source'].forEach(m=>{$('module-'+m).classList.toggle('active',state.module===m);$('module-'+m).setAttribute('aria-pressed',state.module===m)});
+ ['merge','hide','remove','add-report'].forEach(id=>$(id).disabled=!data.length);
+ const flagMode=state.module==='flags',sourceMode=state.module==='source';
+ $('report-head').hidden=flagMode||sourceMode;$('report-panel').hidden=flagMode||sourceMode;$('flags-body').hidden=!flagMode;
+ $('report-filters').hidden=flagMode||sourceMode;$('report-dates').hidden=flagMode||sourceMode;$('flag-controls').hidden=!flagMode;
+ $('merge-rows').hidden=flagMode||sourceMode;$('row-selection-count').hidden=flagMode||sourceMode;
+ $('show-flags').hidden=!flagMode;
+ $('source-body').hidden=!sourceMode;$('export-tools').hidden=sourceMode;$('stats').hidden=sourceMode;
+ $('export-target').value=flagMode?'flags':'report';
+ $('export-target').closest('label').hidden=true;
+ if(flagMode)$('stats').innerHTML='<div class="stat alert"><strong>'+flags.length.toLocaleString()+'</strong><span>Red flags</span></div>';
+ const hasExport=flagMode?flags.length:report.rows.length;['download','copy'].forEach(id=>$(id).disabled=!hasExport);
+ save();
+}
+function editDimension(action){
+ if(!data.length)return;let kind='location',picked=new Set();const dialog=document.createElement('dialog');
+ dialog.innerHTML='<div class="dialog-head"><h2>'+ (action==='merge'?'Merge':'Hide')+'</h2><button type="button" class="icon-button close-dialog" aria-label="Close">×</button></div><div class="mode-buttons"><label><input type="radio" name="dimension" value="location" checked> Locations</label><label><input type="radio" name="dimension" value="client"> Clients</label></div><input class="full picker-search" type="search" placeholder="Search" aria-label="Search items"><div class="mini-actions"><button type="button" class="pick-all">Select all</button><button type="button" class="pick-none">Clear</button></div><div class="check-list picker-list"></div>'+(action==='merge'?'<label class="field">Group name<input class="group-name" placeholder="Optional"></label>':'')+'<div class="preview" aria-live="polite"></div><div class="dialog-footer"><button class="cancel-dialog">Cancel</button><button class="primary apply-dialog" disabled>'+ (action==='merge'?'Merge':'Hide')+'</button></div>';
+ document.body.append(dialog);const q=s=>dialog.querySelector(s);
+ function available(){return contextualValues(data,state,kind)}
+ function preview(){
+  q('.apply-dialog').disabled=picked.size<(action==='merge'?2:1);
+  if(action==='hide'){q('.preview').textContent=picked.size+' '+kind+(picked.size===1?'':'s')+' selected';return}
+  if(picked.size<2){q('.preview').textContent='';return}
+  const next={...state,[kind+'Groups']:replaceDimensionGroup(state[kind+'Groups'],Array.from(picked),q('.group-name').value,'preview')};
+  const result=groupedReport(visibleRecords(data,next),next);const overlaps=state[kind+'Groups'].filter(g=>g.members.some(m=>picked.has(m))).length;
+  q('.preview').innerHTML='<strong>'+report.rows.length+' → '+result.rows.length+' report rows</strong><small>'+ (kind==='location'?'Client groups unchanged.':'Location groups unchanged.')+(overlaps?' '+overlaps+' existing group(s) updated.':'')+'</small>';
+ }
+ function paint(){const term=q('.picker-search').value.toLowerCase(),list=q('.picker-list');list.innerHTML='';available().filter(v=>v.toLowerCase().includes(term)).forEach(v=>{const label=document.createElement('label');label.className='check-item';const cb=document.createElement('input');cb.type='checkbox';cb.checked=picked.has(v);const span=document.createElement('span');span.textContent=v;label.append(cb,span);list.append(label);cb.onchange=()=>{cb.checked?picked.add(v):picked.delete(v);preview()}});preview()}
+ dialog.querySelectorAll('[name=dimension]').forEach(r=>r.onchange=()=>{kind=r.value;picked=new Set();q('.picker-search').value='';paint()});q('.picker-search').oninput=paint;if(action==='merge')q('.group-name').oninput=preview;
+ q('.pick-all').onclick=()=>{picked=new Set(available());paint()};q('.pick-none').onclick=()=>{picked.clear();q('.picker-search').value='';paint()};q('.cancel-dialog').onclick=q('.close-dialog').onclick=()=>dialog.close();dialog.addEventListener('close',()=>dialog.remove());
+ q('.apply-dialog').onclick=()=>{if(picked.size<(action==='merge'?2:1))return;
+  if(action==='merge')state[kind+'Groups']=replaceDimensionGroup(state[kind+'Groups'],Array.from(picked),q('.group-name').value,'g'+Date.now()+Math.random().toString(36).slice(2,7));
+  else{const key=kind==='client'?'hiddenClients':'hiddenLocations';state[key]=Array.from(new Set([...state[key],...picked]))}
+  refresh();status(action==='merge'?'Group saved':'Hidden');dialog.close();
+ };paint();dialog.showModal();
+}
+async function loadFile(file){
+ if(!file)return;if(!/\.xlsx?$/i.test(file.name)){status('Choose an Excel file (.xlsx or .xls).',true);return}
+ if(typeof XLSX==='undefined'){status('Excel library unavailable. Connect to the internet and reload.',true);return}
+ status('Reading file…');
+ try{
+  const book=XLSX.read(await file.arrayBuffer(),{type:'array',cellDates:true});let imported=null;
+  for(const name of book.SheetNames){const records=XLSX.utils.sheet_to_json(book.Sheets[name],{defval:null});if(records.length&&'Client List Selector' in records[0]&&'Job Site' in records[0]){imported=records;break}}
+  if(!imported)throw new Error('Missing Client List Selector / Job Site columns.');
+  const str=v=>v==null?'':String(v).trim();
+  const parsed=imported.filter(r=>str(r['Client List Selector'])||str(r['Job Site'])).map((r,i)=>({id:i,client:str(r['Client List Selector'])||'(No client)',location:normalizeLocation(r['Job Site'])||'(No location)',candidate:str(r['Candidate Name']),recruiter:str(r['Recruiter Name']),eid:str(r.EID),dateAdded:parseDay(r['Date Added']),apptDate:parseDay(r['Branch Appointment Date']??r['Branch Schedule Date']),branchSchedule:str(r['Branch Schedule?']),onboardingStage:str(r['Onboarding Stage']),ebStatusReason:str(r['EB Status Reason'])}));
+  if(!parsed.length)throw new Error('No usable records found.');
+  data=parsed;fileName=file.name;state=fresh();state.module='source';status('');updateLists();paintSaved();render();saveData();
+ }catch(e){status(e.message||'Unable to read this file.',true)}finally{$('file').value=''}
+}
+
+
+function removeReportPairs(keys){const removed=new Set(state.removedPairs);keys.forEach(k=>removed.add(k));state.removedPairs=Array.from(removed);state.addedPairs=state.addedPairs.filter(k=>!removed.has(k));refresh();status('Row removed')}
+function lockReportPairs(keys){state.addedPairs=Array.from(new Set([...state.addedPairs,...keys]));state.removedPairs=state.removedPairs.filter(k=>!keys.includes(k));state.hiddenPairs=state.hiddenPairs.filter(k=>!keys.includes(k));refresh();status(keys.length+' row(s) locked in report')}
+$('report-panel').addEventListener('dragover',e=>{if(Array.from(e.dataTransfer.types).includes('application/x-jk-report')){e.preventDefault();e.dataTransfer.dropEffect='copy';$('report-panel').classList.add('drop-ready')}});
+$('report-panel').addEventListener('dragleave',()=>$('report-panel').classList.remove('drop-ready'));
+$('report-panel').addEventListener('drop',e=>{
+ const payload=e.dataTransfer.getData('application/x-jk-report');if(!payload)return;e.preventDefault();e.stopPropagation();$('report-panel').classList.remove('drop-ready');
+ try{const item=JSON.parse(payload);if(!['client','location'].includes(item.kind)||!Array.isArray(item.members))return;const members=new Set(item.members),other=new Set(item.kind==='client'?state.locations:state.clients);
+ const keys=dragReportPairs(data,item.kind,Array.from(members),Array.from(other));if(keys.length)lockReportPairs(keys);else status('No rows match the selected '+(item.kind==='client'?'locations':'clients')+'. Clear that filter to add all matching rows.',true);
+ }catch(e){status('Unable to add these rows',true)}
+});
+
+function addToReport(){
+ const pairs=Array.from(new Map(data.map(r=>[JSON.stringify([r.client,r.location]),[r.client,r.location]])).entries()).sort((a,b)=>a[1][0].localeCompare(b[1][0])||a[1][1].localeCompare(b[1][1]));
+ const picked=new Set(),dialog=document.createElement('dialog');dialog.innerHTML='<div class="dialog-head"><h2>Add individual rows</h2><button class="icon-button close-add" aria-label="Close">×</button></div><input type="search" class="full pair-search" placeholder="Search client or location" aria-label="Search client or location"><div class="check-list pair-list"></div><div class="dialog-footer"><button class="cancel-add">Cancel</button><button class="primary apply-add" disabled>Add to report</button></div>';document.body.append(dialog);
+ const q=s=>dialog.querySelector(s);
+ function paint(){const term=q('.pair-search').value.toLowerCase(),list=q('.pair-list');list.innerHTML='';pairs.filter(([,pair])=>pair.join(' ').toLowerCase().includes(term)).forEach(([key,pair])=>{const label=document.createElement('label');label.className='check-item';const cb=document.createElement('input');cb.type='checkbox';cb.checked=picked.has(key);const span=document.createElement('span');span.textContent=pair.join(' · ');label.append(cb,span);list.append(label);cb.onchange=()=>{cb.checked?picked.add(key):picked.delete(key);q('.apply-add').disabled=!picked.size;q('.apply-add').textContent='Add to report'+(picked.size?' ('+picked.size+')':'')}})}
+ q('.pair-search').oninput=paint;q('.cancel-add').onclick=q('.close-add').onclick=()=>dialog.close();dialog.onclose=()=>dialog.remove();q('.apply-add').onclick=()=>{lockReportPairs(Array.from(picked));dialog.close()};paint();dialog.showModal();
+}
+$('add-report').onclick=addToReport;
+$('reset-all').onclick=()=>{const module=state.module;state=fresh();state.module=module;state.clients=[];state.locations=[];updateLists();refresh();status('All filters, groups and hidden items cleared')};
+
+
+$('show-flags').onclick=()=>{state.flagsEnabled=true;render()};
+$('merge-rows').onclick=()=>{
+ const selected=Array.from($('report-table').querySelectorAll('[data-select-row]:checked')).map(cb=>report.rows[Number(cb.dataset.selectRow)]);if(selected.length<2)return;
+ const pairs=Array.from(new Set(selected.flatMap(r=>Array.from(r.pairs))));
+ const dialog=document.createElement('dialog');dialog.innerHTML='<div class="dialog-head"><h2>Merge selected rows</h2></div><label class="field">Client label<input id="row-client-name"></label><label class="field">Location label<input id="row-location-name"></label><div class="dialog-footer"><button class="cancel-row-merge">Cancel</button><button class="primary apply-row-merge">Merge rows</button></div>';document.body.append(dialog);
+ dialog.querySelector('#row-client-name').value=Array.from(new Set(selected.map(r=>r.client))).join(' / ');dialog.querySelector('#row-location-name').value=Array.from(new Set(selected.map(r=>r.location))).join(' / ');
+ dialog.querySelector('.cancel-row-merge').onclick=()=>dialog.close();dialog.onclose=()=>dialog.remove();dialog.querySelector('.apply-row-merge').onclick=()=>{
+ const picked=new Set(pairs);state.rowGroups=state.rowGroups.filter(g=>!g.pairs.some(p=>picked.has(p)));state.rowGroups.push({id:'rows'+Date.now(),pairs,clientLabel:dialog.querySelector('#row-client-name').value.trim()||'Merged clients',locationLabel:dialog.querySelector('#row-location-name').value.trim()||'Merged locations'});lockReportPairs(pairs);dialog.close();status('Selected rows merged');
+ };dialog.showModal();
+};
+
+$('upload').onclick=()=>$('file').click();$('file').onchange=e=>loadFile(e.target.files[0]);
+['dragover','drop'].forEach(event=>document.addEventListener(event,e=>{if(Array.from(e.dataTransfer.types).includes('Files')){e.preventDefault();if(event==='drop')loadFile(e.dataTransfer.files[0])}}));
+$('remove').onclick=()=>{data=[];fileName='';state=fresh();state.module='source';try{localStorage.removeItem(DATA_KEY);localStorage.removeItem(STATE_KEY);localStorage.removeItem('divisionReportingDashboard.dataset.v1')}catch(e){}status('');updateLists();refresh()};
+['ns','west','flags','source'].forEach(m=>$('module-'+m).onclick=()=>{state.module=m;render()});
+$('search').oninput=e=>{state.search=e.target.value;render()};$('reset-filters').onclick=()=>{state.clients=[];state.locations=[];state.search='';$('search').value='';refresh()};
+$('merge').onclick=()=>editDimension('merge');$('hide').onclick=()=>editDimension('hide');
+for(const [id,key] of [['schedule-date','scheduleDate'],['interview-date','interviewDate'],['week-end','weekEnd']])$(id).onchange=e=>{if(!e.target.value){e.target.value=state[key];return}state[key]=e.target.value;render()};
+for(const [id,key] of [['recruiter','recruiter'],['flag-date-field','dateField'],['flag-from','from'],['flag-to','to'],['flag-sort','sort']])$(id).onchange=e=>{state.flags[key]=e.target.value;if(key==='sort')delete state.flags.headerKey;render()};
+$('reset-flags').onclick=()=>{state.flags=fresh().flags;syncControls();render()};$('export-target').onchange=render;
+$('download').onclick=()=>{
+ if(typeof XLSX==='undefined'){status('Excel library unavailable. Connect to the internet and reload.',true);return}
+ const isFlags=$('export-target').value==='flags',values=isFlags?flagMatrix():reportMatrix(),book=XLSX.utils.book_new(),sheet=XLSX.utils.aoa_to_sheet(values);sheet['!cols']=values[0].map((_,i)=>({wch:i<2?30:22}));XLSX.utils.book_append_sheet(book,sheet,isFlags?'Red flags':state.module==='west'?'West Weekly':'Division Reporting');XLSX.writeFile(book,(isFlags?'red-flags':state.module==='west'?'west-weekly':'division-reporting')+'-'+VERSION+'-'+localDay(new Date())+'.xlsx');status('Excel downloaded');
+};
+$('copy').onclick=async()=>{
+ const text=toTSV($('export-target').value==='flags'?flagMatrix():reportMatrix());
+ try{if(!navigator.clipboard)throw new Error();await navigator.clipboard.writeText(text);status('Copied')}
+ catch(e){const dialog=document.createElement('dialog');dialog.innerHTML='<div class="dialog-head"><h2>Copy data</h2><button aria-label="Close">×</button></div><textarea aria-label="Data to copy" style="width:100%;height:230px"></textarea>';document.body.append(dialog);dialog.querySelector('textarea').value=text;dialog.querySelector('button').onclick=()=>dialog.close();dialog.onclose=()=>dialog.remove();dialog.showModal();dialog.querySelector('textarea').select();status('Clipboard unavailable. Press Ctrl+C / Cmd+C.');}
+};
+$('mobile-toggle').onclick=()=>{$('sidebar').classList.toggle('open');$('mobile-toggle').setAttribute('aria-expanded',$('sidebar').classList.contains('open'))};
+function restore(){
+ try{const raw=localStorage.getItem(DATA_KEY);let stored=raw?JSON.parse(raw):null;
+ if(!stored){const old=localStorage.getItem('divisionReportingDashboard.dataset.v1');if(old){const p=JSON.parse(old);stored={fileName:p.fileName,rows:p.rows.map((r,i)=>({...r,id:i,client:r.client||'(No client)',location:r.location||'(No location)',dateAdded:parseDay(r.dateAdded),apptDate:parseDay(r.apptDate)}))}}}
+ if(!stored||!Array.isArray(stored.rows)||!stored.rows.length)return;
+ data=stored.rows.map((r,i)=>({...r,id:i}));fileName=stored.fileName||'Saved file';state=fresh();
+
+ }catch(e){data=[];fileName='';state=fresh();status('Saved data could not be restored.',true)}
+}
+restore();updateLists();paintSaved();render();
+})();
+
+</script></body></html>
