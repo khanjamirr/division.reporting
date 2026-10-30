@@ -1,295 +1,536 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Division Reporting by JK · v3.6</title><script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script><style>
-:root{--blue:#315ee7;--ink:#182942;--muted:#69768a;--line:#e3e8f0;--bg:#f4f6fa;--red:#bc3849}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:13px 'Segoe UI',Arial,sans-serif}button,input,select{font:inherit}button,summary{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #87a4fa;outline-offset:2px}[hidden]{display:none!important}button{border:1px solid var(--line);background:white;color:var(--ink);border-radius:7px;padding:8px 11px;font-weight:600;min-height:34px}button:hover{background:#f0f4ff}button:disabled{opacity:.45;cursor:default}.primary{background:var(--blue);border-color:var(--blue);color:white}.primary:hover{background:#254ac0}input,select{border:1px solid #d7deea;border-radius:6px;padding:8px;background:white;color:var(--ink);min-width:0}input[type=checkbox],input[type=radio]{accent-color:var(--blue)}.sidebar{position:fixed;inset:0 auto 0 0;width:290px;background:#fff;border-right:1px solid var(--line);overflow-y:auto;padding:22px 18px;z-index:5}.brand{display:flex;align-items:center;gap:12px;margin-bottom:24px}.logo{width:45px;height:45px;display:grid;place-items:center;background:#192e50;color:white;border-radius:12px;font-size:20px;font-weight:750;letter-spacing:-2px;flex-shrink:0}.brand strong{display:block;font-size:15px;letter-spacing:-.25px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:4px}.side-section{padding:15px 0;border-top:1px solid var(--line)}.section-title{font-size:10px;letter-spacing:1.3px;font-weight:750;color:var(--muted);text-transform:uppercase;margin:0 0 10px}.row{display:flex;gap:7px;align-items:center}.row>*{flex:1}.module{display:flex;background:#f0f3f8;padding:3px;border-radius:8px;gap:3px}.module button{padding:8px 7px;font-size:11px;flex:1;border:0;background:transparent}.module button.active{background:white;box-shadow:0 1px 5px #1c2e4414;color:var(--blue)}.full{width:100%}.file-name{font-size:11px;color:var(--muted);margin:8px 0 0;overflow-wrap:anywhere}.filter-box{border:1px solid var(--line);border-radius:8px;margin-top:9px;overflow:hidden}.filter-box>summary{padding:10px 11px;font-size:12px;list-style:none;display:flex;justify-content:space-between;align-items:center}.filter-box>summary:after{content:'⌄';color:var(--muted)}.filter-box[open]>summary{background:#f5f7fb}.filter-count{font-size:10px;color:var(--muted);margin-left:auto;margin-right:8px}.filter-inside{padding:9px}.filter-inside input[type=search]{width:100%;font-size:11px;padding:7px}.mini-actions{display:flex;gap:8px;margin:7px 0}.mini-actions button{border:0;background:#eff3ff;color:var(--blue);font-size:10px;min-height:26px;padding:4px 9px}.check-list{max-height:172px;overflow:auto}.check-item{display:flex;gap:8px;align-items:flex-start;padding:6px 2px;font-size:12px;cursor:pointer}.check-item input{margin-top:2px;flex-shrink:0}.check-item span{overflow-wrap:anywhere}.check-item.is-hidden{opacity:.5}.short-search{width:100%;padding:8px;font-size:12px}.quiet{color:var(--muted);font-size:11px;background:none;border:0;padding:5px 0;min-height:26px}.field{display:block;font-size:11px;color:var(--muted);margin:9px 0}.field input,.field select{display:block;width:100%;margin-top:4px;font-size:12px;padding:7px}.compact-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:14px}.stat{background:#f5f7fb;border:1px solid #edf0f5;border-radius:7px;padding:8px}.stat strong{display:block;font-size:19px;font-weight:650;line-height:1.2;font-variant-numeric:tabular-nums}.stat span{font-size:9px;color:var(--muted)}.stat.alert{background:#fff5f5}.stat.alert strong{color:var(--red)}.saved-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid #edf0f5;font-size:11px}.saved-item span{min-width:0;overflow-wrap:anywhere}.saved-item small{display:block;color:var(--muted);font-size:10px}.icon-button{flex:none;padding:3px 7px;min-height:26px;font-size:13px}.saved-section{margin-top:10px}.saved-section summary{font-size:11px;cursor:pointer;color:var(--muted)}main{margin-left:290px;padding:27px 28px;min-width:0}.report-head{display:flex;align-items:baseline;gap:12px;justify-content:space-between;margin-bottom:16px}h1{font-size:21px;font-weight:650;letter-spacing:-.5px;margin:0}h2{font-size:16px;letter-spacing:-.2px;margin:0}.meta{color:var(--muted);font-size:11px}.panel{border:1px solid var(--line);background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 5px #17304e03}.scroll-table{overflow:auto;max-height:calc(100vh - 150px)}table{width:100%;border-collapse:collapse;font-size:12px}th{background:#f3f6fb;color:#61718a;text-align:right;font-size:10px;font-weight:650;padding:13px 14px;position:sticky;top:0;z-index:1;min-width:102px;border-bottom:1px solid var(--line)}td{text-align:right;padding:13px 14px;border-bottom:1px solid #edf0f4;font-variant-numeric:tabular-nums;white-space:nowrap}th:first-child,th:nth-child(2),td:first-child,td:nth-child(2){text-align:left}tbody tr:nth-child(even){background:#fcfdff}tbody tr:hover{background:#f1f5ff}tfoot td{position:sticky;bottom:0;font-weight:700;background:#edf2fa;border-top:1px solid #d2dceb}td:first-child{font-weight:600}.badge{font-size:9px;color:#4964a4;background:#edf2ff;padding:2px 5px;border-radius:4px;margin-left:7px}.empty-cell{text-align:center!important;padding:45px;color:var(--muted);font-weight:400!important}.flags-section{margin-top:25px}.flags-head{display:flex;align-items:center;gap:9px;margin-bottom:12px}.count-badge{background:#fee8eb;color:#a32d3d;border-radius:14px;padding:3px 8px;font-size:11px;font-weight:700}.flags-panel{border-color:#efd6db}.flags-panel th{background:#fff1f3;color:#944452}.flags-panel td{text-align:left;font-size:11px}.flags-panel th{text-align:left}.flags-panel .scroll-table{max-height:360px}.reason{border-radius:4px;background:#fff0f2;color:#aa3547;font-size:10px;padding:3px 7px}#status{font-size:11px;margin:9px 0 0;color:var(--blue);overflow-wrap:anywhere}#status.error{color:var(--red)}#status:empty{display:none}dialog{border:1px solid var(--line);border-radius:14px;max-width:560px;width:calc(100% - 32px);padding:24px;color:var(--ink);box-shadow:0 25px 80px #16254040;max-height:90vh;overflow:auto}dialog::backdrop{background:#18294166}.dialog-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.mode-buttons{display:flex;gap:8px;margin-bottom:12px}.mode-buttons label{flex:1;border:1px solid var(--line);padding:10px;border-radius:7px;font-size:12px;cursor:pointer}.mode-buttons label:has(input:checked){background:#edf2ff;border-color:#9bb1ed;color:var(--blue)}dialog .check-list{max-height:230px;min-height:90px;margin:10px 0;border:1px solid var(--line);border-radius:7px;padding:7px}.dialog-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.preview{font-size:12px;background:#f4f7fc;border-radius:7px;padding:10px;margin-top:10px}.preview:empty{display:none}.preview small{display:block;margin-top:4px;color:var(--muted)}.mobile-toggle{display:none}.sort-label{font-size:10px;color:var(--muted)}@media(min-width:1700px){main{padding:32px 38px}}@media(max-width:850px){.sidebar{width:255px;padding:18px 14px}main{margin-left:255px;padding:20px 16px}th,td{padding:11px 10px}.report-head{flex-wrap:wrap}}@media(max-width:620px){.mobile-toggle{display:block;position:fixed;top:10px;left:10px;z-index:8;background:#192e50;color:white;border:0}.sidebar{transform:translateX(-100%);transition:transform .15s;width:285px;padding-top:56px;box-shadow:8px 0 30px #16243c20}.sidebar.open{transform:none}main{margin-left:0;padding:60px 12px 20px}.report-head{gap:7px}h1{font-size:18px}.scroll-table{max-height:65vh}}@media print{.sidebar,.mobile-toggle{display:none}main{margin:0;padding:0}.scroll-table{max-height:none!important;overflow:visible}.panel{border-radius:0}th,tfoot td{position:static}}
-.sidebar{background:#16243b;color:#e1e9f6;border-color:#26384f}.sidebar .brand strong{color:#fff}.sidebar .brand small,.sidebar .section-title,.sidebar .file-name,.sidebar .field,.sidebar .quiet,.sidebar .saved-section summary,.sidebar .saved-item small,.sidebar .filter-count{color:#a9bad2}.sidebar .logo{background:#365fe0}.sidebar .side-section{border-color:#304058}.sidebar .module{background:#101c30}.sidebar .module button{color:#b8c9e1}.sidebar .module button.active{background:#345ddb;color:white}.sidebar button{background:#273a56;border-color:#3e5372;color:#edf3ff}.sidebar button:hover{background:#344c6f}.sidebar button.primary{background:#365fe0;border-color:#365fe0}.sidebar input,.sidebar select{background:#1e304c;color:#edf3ff;border-color:#3e5372}.sidebar input::placeholder{color:#a2b3cd}.sidebar input[type=date]{color-scheme:dark}.sidebar .filter-box{border-color:#3e5372}.sidebar .filter-box[open]>summary{background:#253853}.sidebar .mini-actions button{background:#30476a;color:#d9e5ff}.sidebar .stat{background:#20334f;border-color:#30425d}.sidebar .stat span{color:#aec0d9}.sidebar .stat.alert{background:#3f2837}.sidebar .stat.alert strong{color:#ffb4c0}.sidebar .saved-item{border-color:#304058;min-width:0}.saved-item>span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}.saved-item small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.saved-item>.icon-button{flex:0 0 27px}.sidebar #status{color:#aac4ff}.sidebar #status.error{color:#ffb0bb}.sidebar .quiet{background:transparent;border:0}.reset-all{margin-top:12px!important}.flags-section{margin-top:0}.flags-panel .scroll-table{max-height:calc(100vh - 110px)}.pair-list{max-height:340px!important}.sidebar input[type=checkbox]{accent-color:#7d9cff}.sidebar{scrollbar-color:#637895 #16243b}dialog{color-scheme:light}
-.sidebar .module{display:grid;grid-template-columns:1fr 1fr}.sidebar #client-filter{border-color:#5668aa}.sidebar #client-filter>summary{background:#303e70;color:#e0e7ff}.sidebar #location-filter{border-color:#3c8b83}.sidebar #location-filter>summary{background:#1d4c4c;color:#d5fff5}.sidebar #client-filter .filter-count,.sidebar #location-filter .filter-count{color:#dae7f7}.export-tools{display:flex;justify-content:flex-end;gap:8px;margin-bottom:14px}.export-tools .full{width:auto}.export-tools button{margin-top:0!important}.source-module{max-width:700px;background:white;padding:28px;border:1px solid var(--line);border-radius:12px}.source-module .row{max-width:350px}.source-module .file-name{margin-top:18px}.header-sort{border:0;background:transparent;color:inherit;padding:0;min-height:24px;text-align:left;font:inherit;white-space:nowrap}.header-sort:hover{background:#ffe1e7}.header-sort span{margin-left:5px}.action-col{min-width:40px;width:40px}.row-remove{border:0;background:#fff0f2;color:#a92f42;min-height:25px;padding:2px 8px;font-size:16px}.locked{background:#e8f6ef;color:#247550}.drop-ready{outline:3px dashed var(--blue);outline-offset:3px}.draggable-item{cursor:grab}.draggable-item:active{cursor:grabbing}.sidebar .draggable-item:hover{color:white;text-decoration:underline}#report-table td:last-child{width:40px;padding:6px}#status{margin:10px 0}.source-module .section-title{font-size:18px;letter-spacing:0;text-transform:none;color:var(--ink)}
-.source-module{max-width:none;width:100%;min-height:calc(100vh - 60px);padding:32px}.source-title{font-size:24px;margin:0 0 26px}.source-module .row{max-width:370px}.source-module .row button{min-height:42px}.source-module .file-name{font-size:13px;padding:18px;background:#f4f7fc;border:1px solid var(--line);border-radius:8px;max-width:760px}@media(max-width:620px){.source-module{min-height:calc(100vh - 80px);padding:22px}}
-#report-table .action-col{min-width:122px;width:122px}#report-table .row-actions{white-space:nowrap;text-align:left;padding:8px;position:sticky;left:0;background:#fff;z-index:1}#report-table .row-actions input{vertical-align:middle;margin-right:7px}#report-table .row-hide{padding:3px 7px;min-height:25px;font-size:10px;margin-left:5px}#report-table th:nth-child(3),#report-table td:nth-child(3){text-align:left}#report-table td:nth-child(2){font-weight:600}#report-table td:last-child{width:auto;padding:13px 14px}.export-tools{align-items:center;flex-wrap:wrap}#merge-rows{margin-right:auto}#row-selection-count{font-size:11px;color:var(--muted)}
-.sidebar #client-filter{background:#f0f3ff;border-color:#a6b8ee;color:#21355d}.sidebar #client-filter>summary{background:#dce5fc;color:#203866}.sidebar #location-filter{background:#edf8f5;border-color:#8ac8bb;color:#174b43}.sidebar #location-filter>summary{background:#d2eee6;color:#194d42}.sidebar #client-filter .filter-count,.sidebar #location-filter .filter-count{color:#4b6276}.sidebar .filter-box>summary:after{color:#496078}.sidebar .filter-box input[type=search]{background:#fff;color:#20324d;border-color:#b6c5df}.sidebar .filter-box input[type=search]::placeholder{color:#61738b}.sidebar .filter-box .mini-actions button{background:#dce5fb;color:#244b9a;border:1px solid #bdcff4}.sidebar #location-filter .mini-actions button{background:#d0ebe3;color:#215c4d;border-color:#a1d0c2}.sidebar .filter-box .mini-actions button:hover{filter:brightness(.95)}.sidebar .filter-box .check-item:hover{background:#dde7fa;border-radius:5px}.sidebar #location-filter .check-item:hover{background:#d4eee5}.sidebar .filter-box .draggable-item:hover{color:#21478a}.sidebar #location-filter .draggable-item:hover{color:#175841}.sidebar .filter-box input[type=checkbox]{accent-color:#315ee7}.sidebar #location-filter input[type=checkbox]{accent-color:#26846d}.sidebar .filter-box .check-list{scrollbar-color:#acbdd7 transparent}
-</style></head><body><button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle controls" aria-expanded="false">☰</button><aside class="sidebar" id="sidebar"><div class="brand"><div class="logo" aria-label="JK logo">JK</div><div><strong>Division Reporting by JK</strong><small>Version 3.6</small></div></div>
-<div class="module" role="group" aria-label="Report module"><button id="module-ns" class="active" aria-pressed="true">North / SE / SC</button><button id="module-west" aria-pressed="false">West</button><button id="module-flags" aria-pressed="false">Red flags</button><button id="module-source" aria-pressed="false">Data source</button></div>
-<button id="reset-all" class="full reset-all">Clear all filters</button><div id="status" role="status" aria-live="polite"></div><div class="compact-stats" id="stats"></div>
-<div class="side-section" id="report-dates"><h3 class="section-title">Reporting dates</h3><div id="ns-dates"><label class="field">Schedules<input id="schedule-date" type="date"></label><label class="field">Interviews<input id="interview-date" type="date"></label></div><div id="west-dates" hidden><label class="field">Week ending<input id="week-end" type="date"></label></div></div>
-<div class="side-section" id="report-filters"><h3 class="section-title">Filters · shared</h3><input class="short-search" type="search" id="search" placeholder="Search report" aria-label="Search report"><div id="dimension-filters"></div><button class="quiet" id="reset-filters">Reset filters</button><button id="add-report" class="full" style="margin:4px 0 8px">Add to report</button><div class="row"><button id="merge" class="primary">Merge</button><button id="hide">Hide</button></div><details class="saved-section"><summary id="added-summary">Individual rows · 0</summary><div id="added-list"></div></details><details class="saved-section"><summary id="groups-summary">Groups · 0</summary><div id="groups-list"></div></details><details class="saved-section"><summary id="hidden-summary">Hidden · 0</summary><div id="hidden-list"></div></details></div>
-<div class="side-section" id="flag-controls"><details open><summary class="section-title">Red flags</summary><label class="field">Recruiter<select id="recruiter"><option value="">All recruiters</option></select></label><label class="field">Date field<select id="flag-date-field"><option value="dateAdded">Date added</option><option value="apptDate">Appointment date</option></select></label><div class="row"><label class="field">From<input id="flag-from" type="date"></label><label class="field">To<input id="flag-to" type="date"></label></div><label class="field">Sort by<select id="flag-sort"><option value="recruiter">Recruiter A–Z</option><option value="candidate">Candidate A–Z</option><option value="client">Client A–Z</option><option value="location">Location A–Z</option><option value="dateDesc">Date · newest first</option><option value="dateAsc">Date · oldest first</option></select></label><button id="reset-flags" class="quiet">Reset red flag filters</button></details></div>
-</aside><main><section id="source-body" class="source-module" hidden><h1 class="source-title">Data source</h1><div class="row"><button class="primary" id="upload">Upload Excel</button><button id="remove">Remove</button></div><input type="file" id="file" accept=".xlsx,.xls" hidden><div class="file-name" id="file-name">No file loaded</div></section><div id="export-tools" class="export-tools"><button id="merge-rows" class="primary" disabled>Merge selected</button><span id="row-selection-count"></span><button id="show-flags" hidden>Show red flags</button><label class="field">Data<select id="export-target"><option value="report">Current report</option><option value="flags">Filtered red flags</option></select></label><button id="download" class="full">Download Excel</button><button id="copy" class="full" style="margin-top:7px">Copy to clipboard</button></div>
-<div class="report-head" id="report-head"><h1 id="report-title">North / SE / SC</h1><span class="meta" id="report-meta"></span></div><div class="panel" id="report-panel"><div class="scroll-table" tabindex="0" role="region" aria-label="Report data"><table id="report-table"><thead></thead><tbody></tbody><tfoot></tfoot></table></div></div><section class="flags-section" id="flags-body" hidden><div class="flags-head"><h2>Red flags</h2><span class="count-badge" id="flag-count">0</span></div><div class="panel flags-panel"><div class="scroll-table" tabindex="0" role="region" aria-label="Red flag data"><table id="flag-table"><thead></thead><tbody></tbody></table></div></div></section></main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Division Report - 1.0.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{
+  --bg:#f3f5f8; --surface:#fff; --border:#e2e6ed; --border-2:#d5dbe4; --text:#0a1f44; --text-2:#475569; --muted:#64748b; --faint:#94a3b8;
+  --navy:#0a1f44; --accent:#0a84ff; --accent-bg:#e8f2ff; --red:#d6433b; --red-bg:#fdecec; --green:#0f8a6e; --amber:#8a5300; --amber-bg:#fff7e6;
+  --radius:12px; --shadow:0 1px 2px rgba(15,23,42,.06),0 0 0 1px rgba(15,23,42,.04);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.45;cursor:default}
+[hidden]{display:none!important}
+.top{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;display:flex;align-items:center;gap:14px;padding:12px 20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;letter-spacing:-.01em}
+.brand i{width:30px;height:30px;border-radius:9px;background:var(--red);display:grid;place-items:center;flex:none}
+.brand small{display:block;font-weight:500;font-size:11.5px;color:#a9b8d3}
+.top .grow{flex:1}
+.tbtn{border:0;border-radius:9px;padding:8px 13px;background:rgba(255,255,255,.1);color:#fff;font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:6px}
+.tbtn:hover{background:rgba(255,255,255,.18)}
+.tbtn.primary{background:var(--accent)}.tbtn.primary:hover{background:#2b95ff}
+.filechip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border-radius:9px;padding:6px 10px;font-size:12.5px;max-width:460px;min-width:0}
+.filechip span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.page{max-width:1700px;margin:0 auto;padding:16px 20px 48px}
+.tabs{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.1);max-width:100%;overflow-x:auto}
+.tabs button{border:0;background:transparent;border-radius:8px;padding:7px 14px;font-size:13px;font-weight:600;color:#c9d4e8;white-space:nowrap}.tabs button:hover{color:#fff}
+.tabs button.on{background:#fff;color:var(--text)}
+.tabs .n{display:inline-block;min-width:18px;margin-left:4px;padding:0 5px;border-radius:9px;background:var(--red-bg);color:var(--red);font-size:11px}
+.wrap{display:grid;grid-template-columns:280px minmax(0,1fr);gap:16px;align-items:start}
+.wrap.full{grid-template-columns:minmax(0,1fr)}.wrap.full .side{display:none}
+.panel{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow)}
+.side{padding:14px;position:sticky;top:72px;max-height:calc(100vh - 88px);overflow:auto}
+.main{display:flex;flex-direction:column;gap:12px;min-width:0}
+.sec{border-top:1px solid var(--border);padding-top:12px;margin-top:12px}
+.sec h4{margin:0 0 8px;font-size:12.5px}
+.hint{font-size:12px;color:var(--muted)}
+.field{display:block;font-size:11.5px;color:var(--muted);margin:8px 0}
+.field input,.field select{display:block;width:100%;margin-top:4px;padding:7px 8px;border:1px solid var(--border-2);border-radius:8px;font-size:12.5px;background:#fff;color:var(--text)}
+.search{width:100%;padding:8px 10px;border:1px solid var(--border-2);border-radius:9px;font-size:12.5px;background:#fff}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;align-items:center}.row>.field{flex:1;margin:0;min-width:110px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.stat{background:#f5f7fa;border:1px solid #e8ecf2;border-radius:10px;padding:8px 10px}
+.stat strong{display:block;font-size:18px;font-variant-numeric:tabular-nums}.stat span{font-size:11px;color:var(--muted)}
+.stat.alert{background:#fff5f5;border-color:#f6d5d3}.stat.alert strong{color:var(--red)}
+.status{margin:8px 0 0;font-size:12px;color:var(--accent)}.status:empty{display:none}.status.error{color:var(--red)}
+.btn{border:1px solid var(--border-2);background:#fff;border-radius:8px;padding:6px 11px;font-size:12.5px;font-weight:600;color:var(--text);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn:hover:not(:disabled){background:#f5f7fa}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}.btn.primary:hover:not(:disabled){background:#2b95ff}
+.btn.danger{color:var(--red);border-color:#f0cfcd}
+.link{border:0;background:none;padding:0;color:var(--accent);font-size:12px;font-weight:600}
+.link.red{color:var(--red)}
+.dim{border:1px solid var(--border);border-radius:10px;margin-top:8px;overflow:hidden;background:#fff}
+.dim>summary{display:flex;align-items:center;gap:8px;padding:9px 10px;font-size:12.5px;font-weight:600;cursor:pointer;list-style:none;background:#f5f8fc}
+.dim>summary::-webkit-details-marker{display:none}.dim>summary:after{content:'▾';color:var(--faint)}
+.dim .cnt{margin-left:auto;font-size:11px;font-weight:500;color:var(--muted)}
+.dim-in{padding:8px}.dim-in input[type=search]{width:100%;padding:6px 8px;border:1px solid var(--border-2);border-radius:7px;font-size:12px}
+.mini{display:flex;gap:6px;margin:6px 0;align-items:center}.mini button{border:1px solid var(--border-2);background:#f5f7fa;border-radius:6px;padding:3px 9px;font-size:11px;color:var(--text)}
+.mini .hint{margin-left:auto}
+.checks{max-height:220px;overflow:auto}
+.check{display:flex;gap:8px;align-items:flex-start;padding:5px 2px;font-size:12.5px;cursor:pointer;border-radius:6px}.check:hover{background:#f3f6fa}
+.check input{margin-top:2px;accent-color:var(--accent)}.check em{font-style:normal;font-size:10.5px;color:var(--accent);margin-left:4px}.check.off{opacity:.5}
+.saved{margin-top:8px;font-size:12px}.saved summary{cursor:pointer;color:var(--text-2);font-weight:600}
+.saved-item{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #f0f2f6}
+.saved-item span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.saved-item small{display:block;color:var(--faint);font-size:10.5px}
+.x{border:1px solid #f2d3d1;background:#fff6f5;color:var(--red);border-radius:6px;min-width:26px;height:24px;font-size:14px;line-height:1}
+.tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.tools .grow{flex:1}
+.head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:14px 16px;border-bottom:1px solid var(--border)}.head h3{margin:0;font-size:15px}
+.chip{border:1px solid var(--border-2);background:#fff;border-radius:999px;padding:4px 11px;font-size:12px;color:var(--text-2)}
+.chip b{font-weight:600;margin-left:3px}.chip.on{background:var(--accent-bg);border-color:#9cc6ff;color:#0a52b3}
+.scroll{overflow:auto;max-height:calc(100vh - 230px)}
+table.t{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
+table.t th{position:sticky;top:0;z-index:1;background:#f6f8fb;color:var(--text-2);font-size:11px;font-weight:700;letter-spacing:.03em;text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);white-space:nowrap}
+table.t td{padding:9px 12px;border-bottom:1px solid #f0f2f6;white-space:nowrap}
+table.t .num{text-align:right}
+table.t tbody tr:hover{background:#f7faff}
+table.t tfoot td{position:sticky;bottom:0;background:#eef3fa;font-weight:700;border-top:1px solid var(--border)}
+.act{width:118px}.act input{vertical-align:middle;margin-right:6px;accent-color:var(--accent)}
+.hide-btn{border:1px solid var(--border-2);background:#fff;border-radius:6px;padding:2px 7px;font-size:11px;margin-left:4px}
+.badge{font-size:10px;background:#e8edf5;color:#0a52b3;padding:1px 6px;border-radius:5px;margin-left:6px}
+.empty{text-align:center!important;padding:40px!important;color:var(--muted);white-space:normal!important}
+.sort{border:0;background:none;color:inherit;padding:0;font-weight:inherit;letter-spacing:inherit}.sort span{opacity:.55;margin-left:3px}
+.reason{background:var(--red-bg);color:#a32d2d;font-size:11px;padding:2px 7px;border-radius:5px}
+.count{background:var(--red-bg);color:var(--red);border-radius:12px;padding:2px 8px;font-size:12px;font-weight:700}
+.drop{border:2px dashed var(--border-2);border-radius:16px;background:#fff;padding:56px 20px;text-align:center;margin:28px auto;max-width:720px}
+.drop.over{border-color:var(--accent);background:var(--accent-bg)}
+.drop h2{margin:14px 0 6px;font-size:22px;letter-spacing:-.01em}
+.drop p{margin:0 0 18px;color:var(--text-2)}
+.drop .ic{width:56px;height:56px;border-radius:16px;background:var(--accent-bg);color:var(--accent);display:inline-grid;place-items:center}
+.drop .small{margin-top:16px;font-size:12px;color:var(--muted)}
+.msg{padding:10px 12px;border-radius:9px;font-size:13px}
+.msg.warn{background:var(--amber-bg);color:var(--amber)}.msg.err{background:var(--red-bg);color:#a32d2d}.msg.info{background:var(--accent-bg);color:#0a52b3}
+.card{padding:16px}
+.card h3{margin:0 0 4px;font-size:15px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:9px 16px;border-radius:999px;font-size:13px;font-weight:600;z-index:100;box-shadow:0 8px 24px rgba(10,31,68,.3);max-width:calc(100vw - 32px);text-align:center}
+.overlay{position:fixed;inset:0;background:rgba(10,31,68,.35);z-index:60;display:grid;place-items:center;padding:16px}
+.modal{background:#fff;border-radius:14px;box-shadow:0 20px 50px rgba(10,31,68,.3);width:100%;max-width:520px;max-height:calc(100vh - 32px);overflow:auto}
+.modal-h{display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border)}.modal-h h3{margin:0;font-size:15px;flex:1}
+.modal-h button{border:0;background:#f1f4f8;border-radius:50%;width:28px;height:28px;font-size:16px;line-height:1}
+.modal-b{padding:14px 16px}
+.modal .checks{max-height:260px;border:1px solid var(--border);border-radius:8px;padding:6px;margin:8px 0}
+.seg{display:flex;gap:8px;margin-bottom:10px}.seg label{flex:1;border:1px solid var(--border-2);border-radius:8px;padding:8px 10px;font-size:13px;cursor:pointer}
+.seg label:has(input:checked){border-color:var(--accent);background:var(--accent-bg)}
+.preview{font-size:12.5px;background:#f5f7fa;border-radius:8px;padding:8px 10px;margin-top:8px}.preview:empty{display:none}
+.foot{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+@media(max-width:900px){.wrap{grid-template-columns:minmax(0,1fr)}.main{order:-1}.side{position:static;max-height:none}.scroll{max-height:70vh}}
+@media(max-width:560px){.tabs{order:5;flex-basis:100%}.page{padding:12px 16px 40px}.top{padding:10px 16px;position:static}.brand small{display:none}.filechip{max-width:100%}.drop{padding:40px 16px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></i><div>Division Report<small>From your PowerApp Excel export</small></div></div>
+  <div class="tabs" role="tablist" aria-label="Report" id="tabs" hidden></div>
+  <div class="filechip" id="fileChip" hidden><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/></svg><span id="fileName"></span></div>
+  <div class="grow"></div>
+  <button class="tbtn" id="clearBtn" hidden>Clear file</button>
+  <button class="tbtn primary" id="openBtn">Open Excel file</button>
+  <input type="file" id="fileIn" accept=".xlsx,.xls,.xlsm" hidden>
+</header>
+
+<div class="page">
+  <div id="landing" class="drop" role="region" aria-label="Open a file">
+    <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></div>
+    <h2>Drop the PowerApp Excel export here</h2>
+    <p>It needs the <b>Client List Selector</b> and <b>Job Site</b> columns. The file is read in this tab only — nothing is uploaded or saved.</p>
+    <button class="btn primary" id="landingOpen">Choose Excel file</button>
+        <p class="status error" id="landingErr" style="margin-top:12px"></p>
+  </div>
+
+  <div id="app" hidden>
+    <div class="wrap" id="wrap">
+      <aside class="side panel" id="side">
+        <div class="stats" id="stats"></div>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+        <section class="sec" id="secDates"><h4>Reporting dates</h4>
+          <div id="nsDates"><label class="field">Schedules created on<input id="scheduleDate" type="date"></label><label class="field">Interviews on<input id="interviewDate" type="date"></label></div>
+          <div id="westDates"><label class="field">Week ending<input id="weekEnd" type="date"></label></div>
+          <div class="hint" id="fileRange"></div>
+          <div class="row"><button type="button" class="btn" id="latestDay">Latest day in file</button><button type="button" class="btn" id="today">Today</button></div>
+        </section>
+        <section class="sec" id="secFilters"><h4>Filters</h4>
+          <input type="search" id="search" class="search" placeholder="Search client or location" aria-label="Search report">
+          <div id="dims"></div>
+          <div class="row"><button type="button" class="btn" id="mergeBtn">Merge…</button><button type="button" class="btn" id="hideBtn">Hide…</button><button type="button" class="btn" id="addBtn">Add rows…</button></div>
+          <details class="saved"><summary id="groupsSum">Groups · 0</summary><div id="groupsList"></div></details>
+          <details class="saved"><summary id="addedSum">Added rows · 0</summary><div id="addedList"></div></details>
+          <details class="saved"><summary id="hiddenSum">Hidden · 0</summary><div id="hiddenList"></div></details>
+          <div style="margin-top:10px"><button type="button" class="link" id="resetBtn">Reset my filters and groups</button></div>
+        </section>
+        <section class="sec" id="secFlags"><h4>Red flags</h4>
+          <label class="field">Recruiter<select id="fRecruiter"></select></label>
+          <label class="field">Date field<select id="fDateField"><option value="dateAdded">Date added</option><option value="apptDate">Appointment date</option></select></label>
+          <div class="row"><label class="field">From<input id="fFrom" type="date"></label><label class="field">To<input id="fTo" type="date"></label></div>
+          <label class="field">Sort by<select id="fSort"><option value="recruiter">Recruiter A–Z</option><option value="client">Client A–Z</option><option value="location">Location A–Z</option><option value="dateDesc">Date · newest first</option><option value="dateAsc">Date · oldest first</option></select></label>
+          <button type="button" class="link" id="resetFlags">Reset red flag filters</button>
+        </section>
+      </aside>
+
+      <div class="main">
+        <div class="tools" id="tools">
+          <button type="button" class="btn" id="selAll">Select all</button><button type="button" class="btn" id="selNone" disabled>Clear</button>
+          <button type="button" class="btn primary" id="mergeRows" disabled>Merge selected rows</button><button type="button" class="btn" id="hideSel" disabled>Hide selected</button><button type="button" class="btn" id="rmSel" disabled>Remove selected</button>
+          <span class="hint" id="selCount"></span><span class="grow"></span>
+          <button type="button" class="btn" id="copyBtn">Copy</button><button type="button" class="btn" id="xlsxBtn">Download Excel</button>
+        </div>
+
+        <section class="panel" id="reportPanel" style="overflow:hidden">
+          <div class="head"><h3 id="title"></h3><span class="hint" id="sub"></span></div>
+          <div class="scroll"><table class="t" id="table"><thead></thead><tbody></tbody><tfoot></tfoot></table></div>
+        </section>
+
+        <section class="panel" id="flagsPanel" style="overflow:hidden">
+          <div class="head"><h3>Red flags</h3><span class="count" id="flagCount">0</span><span class="hint">Branch schedule “Yes” with no appointment date, or an appointment date without “Yes”.</span></div>
+          <div class="scroll"><table class="t" id="flagTable"><thead></thead><tbody></tbody></table></div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
+(()=>{
 'use strict';
-const VERSION='v3.6';
+const LS_KEY='division_report_v1';
 const NS_HEADERS=['Client','Location','Pending onboarding','Schedules for today','Interviews today','Total schedules','Total pipeline'];
 const WEST_HEADERS=['Client','Location','Pending onboarding','Schedule in branch','Pipeline (Available/OAE)','Pipeline (Unavailable/Inactive)'];
-const FLAG_HEADERS=['Recruiter','Candidate','EID','Client','Location','Branch Schedule?','Appointment date','Why'];
-function localDay(d){return d instanceof Date&&!isNaN(d)?d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'):'';}
+const FLAG_COLS=[['recruiter','Recruiter'],['eid','EID'],['client','Client'],['location','Location'],['dateAdded','Date added'],['branchSchedule','Branch schedule?'],['apptDate','Appointment date'],['reason','Why']];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const localDay=d=>d instanceof Date&&!isNaN(d)?d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'):'';
+const today=()=>localDay(new Date());
+const shift=(day,n)=>{ const d=new Date(day+'T12:00:00'); d.setDate(d.getDate()+n); return localDay(d); };
+const fmtDate=s=>{ if(!s) return ''; const d=new Date(s+'T12:00:00'); return isNaN(d)?s:d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}); };
+const nf=n=>Number(n||0).toLocaleString();
+function toast(t){ const el=document.createElement('div'); el.className='toast'; el.textContent=t; document.body.appendChild(el); setTimeout(()=>el.remove(),2400); }
+
+// ---------- reading values ----------
 function parseDay(v){
- if(v instanceof Date)return isNaN(v)?'':v.getUTCFullYear()+'-'+String(v.getUTCMonth()+1).padStart(2,'0')+'-'+String(v.getUTCDate()).padStart(2,'0');
- if(typeof v==='number'){const d=new Date(Date.UTC(1899,11,30)+Math.floor(v)*86400000);return d.toISOString().slice(0,10);}
- if(typeof v!=='string'||!v.trim())return '';
- const s=v.trim(),iso=s.match(/^(\d{4})-(\d{2})-(\d{2})$/);if(iso)return s;
- return localDay(new Date(s));
+  if(v instanceof Date) return localDay(v);
+  if(typeof v==='number'&&isFinite(v)){ const d=new Date(Date.UTC(1899,11,30)+Math.floor(v)*86400000); return d.toISOString().slice(0,10); }
+  if(typeof v!=='string'||!v.trim()) return '';
+  const s=v.trim(); const iso=s.match(/^(\d{4}-\d{2}-\d{2})/); if(iso) return iso[1];
+  const us=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/); if(us){ let y=+us[3]; if(y<100) y+=2000; return y+'-'+String(us[1]).padStart(2,'0')+'-'+String(us[2]).padStart(2,'0'); }
+  return localDay(new Date(s));
 }
-function normalizeLocation(v){let s=String(v||'').trim().replace(/\s+/g,' ').replace(/\s*,\s*/g,', ');if(!s.includes(','))s=s.replace(/^(.*\S)\s+([A-Za-z]{2})$/,(_,a,b)=>a+', '+b.toUpperCase());else s=s.replace(/,\s*([A-Za-z]{2})$/,(_,b)=>', '+b.toUpperCase());return s;}
-function visibleRecords(data,state){
- const clients=new Set(state.clients),locations=new Set(state.locations),hc=new Set(state.hiddenClients),hl=new Set(state.hiddenLocations),q=state.search.trim().toLowerCase();
- const added=new Set(state.addedPairs||[]),removed=new Set([...(state.removedPairs||[]),...(state.hiddenPairs||[])]);
- return data.filter(r=>!removed.has(JSON.stringify([r.client,r.location]))&&(added.has(JSON.stringify([r.client,r.location]))||(clients.has(r.client)&&locations.has(r.location)&&!hc.has(r.client)&&!hl.has(r.location)&&(!q||(r.client+' '+r.location).toLowerCase().includes(q)))));
+function normalizeLocation(v){ let s=String(v??'').trim().replace(/\s+/g,' ').replace(/\s*,\s*/g,', '); if(!s.includes(',')) s=s.replace(/^(.*\S)\s+([A-Za-z]{2})$/,(_,a,b)=>a+', '+b.toUpperCase()); else s=s.replace(/,\s*([A-Za-z]{2})$/,(_,b)=>', '+b.toUpperCase()); return s; }
+const stateOf=loc=>{ const m=String(loc).match(/,\s*([A-Z]{2})$/); return m?m[1]:''; };
+const norm=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+const isYes=r=>r.branchSchedule==='Yes';
+const isComplete=r=>norm(r.onboardingStage)==='ebcompletei9complete';
+const reasonIn=(r,list)=>list.includes(norm(r.ebStatusReason));
+const pairKey=(c,l)=>JSON.stringify([c,l]);
+
+// ---------- saved settings (this browser) ----------
+const LS={ get(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)||'null'); }catch(e){ return null; } }, set(v){ try{ localStorage.setItem(LS_KEY,JSON.stringify(v)); }catch(e){} } };
+function freshFilters(){ const t=today(); return {addedPairs:[],removedPairs:[],hiddenPairs:[],rowGroups:[],clients:[],locations:[],hiddenClients:[],hiddenLocations:[],clientGroups:[],locationGroups:[],search:'',scheduleDate:t,interviewDate:t,weekEnd:t}; }
+const freshFlags=()=>({recruiter:'',dateField:'dateAdded',from:'',to:'',sort:'recruiter'});
+let state={module:'ns',...freshFilters(),flags:freshFlags()};
+(()=>{ const s=LS.get(); if(s&&typeof s==='object') state={...state,...s,flags:{...freshFlags(),...(s.flags||{})}}; delete state.divisions; delete state.nsOff; if(!['ns','west','flags'].includes(state.module)) state.module='ns';
+  const t=today(); ['scheduleDate','interviewDate','weekEnd'].forEach(k=>{ if(!/^\d{4}-\d{2}-\d{2}$/.test(state[k]||'')) state[k]=t; }); })();
+function save(){ LS.set(state); }
+
+// ---------- data (memory only) ----------
+let data=[], file=null, report={rows:[],totals:[]}, flags=[], msg={text:'',error:false};
+
+function scoped(){ return data; }
+const allClients=()=>[...new Set(scoped().map(r=>r.client))].sort();
+const allLocations=()=>[...new Set(scoped().map(r=>r.location))].sort();
+
+// ---------- report maths ----------
+function visibleRecords(rows,st){
+  const clients=new Set(st.clients),locations=new Set(st.locations),hc=new Set(st.hiddenClients),hl=new Set(st.hiddenLocations),q=st.search.trim().toLowerCase();
+  const added=new Set(st.addedPairs),removed=new Set([...st.removedPairs,...st.hiddenPairs]);
+  return rows.filter(r=>{ const k=pairKey(r.client,r.location); return !removed.has(k)&&(added.has(k)||(clients.has(r.client)&&locations.has(r.location)&&!hc.has(r.client)&&!hl.has(r.location)&&(!q||(r.client+' '+r.location).toLowerCase().includes(q)))); });
 }
-function groupMap(groups){const map=new Map();groups.forEach(g=>g.members.forEach(m=>map.set(m,g)));return map;}
-function groupedReport(records,state){
- const cm=groupMap(state.clientGroups),lm=groupMap(state.locationGroups),buckets=new Map(),rowMap=new Map();
- (state.rowGroups||[]).forEach(g=>g.pairs.forEach(p=>rowMap.set(p,g)));
- const end=new Date(state.weekEnd+'T12:00:00'),start=new Date(end);start.setDate(start.getDate()-6);const from=localDay(start);
- records.forEach(r=>{
-  const single=(state.addedPairs||[]).includes(JSON.stringify([r.client,r.location]));
-  const rg=rowMap.get(JSON.stringify([r.client,r.location]));
-  const c=single?null:cm.get(r.client),l=single?null:lm.get(r.location),key=rg?JSON.stringify(['row',rg.id]):JSON.stringify([c?['g',c.id]:['v',r.client],l?['g',l.id]:['v',r.location]]);
-  if(!buckets.has(key))buckets.set(key,{client:rg?rg.clientLabel:(c?c.name:r.client),location:rg?rg.locationLabel:(l?l.name:r.location),counts:Array(state.module==='west'?4:5).fill(0),ids:[],pairs:new Set()});
-  const b=buckets.get(key);b.ids.push(r.id);b.pairs.add(JSON.stringify([r.client,r.location]));
-  if(state.module==='west'){
-   if(!r.dateAdded||r.dateAdded<from||r.dateAdded>state.weekEnd)return;
-   if(r.onboardingStage!=='EB Complete/I9 Complete')b.counts[0]++;
-   if(r.branchSchedule==='Yes')b.counts[1]++;
-   if(['Available','OAE'].includes(r.ebStatusReason))b.counts[2]++;
-   if(['Unavailable','Inactive'].includes(r.ebStatusReason))b.counts[3]++;
-  }else{
-   if(r.onboardingStage!=='EB Complete/I9 Complete')b.counts[0]++;
-   if(r.branchSchedule==='Yes'&&r.dateAdded===state.scheduleDate)b.counts[1]++;
-   if(r.apptDate&&r.apptDate===state.interviewDate)b.counts[2]++;
-   if(r.branchSchedule==='Yes')b.counts[3]++;
-   b.counts[4]++;
-  }
- });
- const result=Array.from(buckets.values());result.sort((a,b)=>a.location.localeCompare(b.location)||a.client.localeCompare(b.client));
- return {rows:result,totals:result.reduce((t,b)=>t.map((n,i)=>n+b.counts[i]),Array(state.module==='west'?4:5).fill(0))};
+function groupMap(groups){ const m=new Map(); groups.forEach(g=>g.members.forEach(x=>m.set(x,g))); return m; }
+function groupedReport(records,st){
+  const cm=groupMap(st.clientGroups),lm=groupMap(st.locationGroups),buckets=new Map(),rowMap=new Map(),west=st.module==='west',n=west?4:5;
+  st.rowGroups.forEach(g=>g.pairs.forEach(p=>rowMap.set(p,g)));
+  const from=shift(st.weekEnd,-6), added=new Set(st.addedPairs);
+  records.forEach(r=>{
+    const pk=pairKey(r.client,r.location), single=added.has(pk), rg=rowMap.get(pk);
+    const c=single?null:cm.get(r.client), l=single?null:lm.get(r.location);
+    const key=rg?JSON.stringify(['row',rg.id]):JSON.stringify([c?['g',c.id]:['v',r.client],l?['g',l.id]:['v',r.location]]);
+    if(!buckets.has(key)) buckets.set(key,{client:rg?rg.clientLabel:(c?c.name:r.client),location:rg?rg.locationLabel:(l?l.name:r.location),counts:Array(n).fill(0),pairs:new Set()});
+    const b=buckets.get(key); b.pairs.add(pk);
+    if(west){
+      if(!r.dateAdded||r.dateAdded<from||r.dateAdded>st.weekEnd) return;
+      if(!isComplete(r)) b.counts[0]++;
+      if(isYes(r)) b.counts[1]++;
+      if(reasonIn(r,['available','oae'])) b.counts[2]++;
+      if(reasonIn(r,['unavailable','inactive'])) b.counts[3]++;
+    } else {
+      if(!isComplete(r)) b.counts[0]++;
+      if(isYes(r)&&r.dateAdded===st.scheduleDate) b.counts[1]++;
+      if(r.apptDate&&r.apptDate===st.interviewDate) b.counts[2]++;
+      if(isYes(r)) b.counts[3]++;
+      b.counts[4]++;
+    }
+  });
+  const rows=[...buckets.values()].sort((a,b)=>a.location.localeCompare(b.location)||a.client.localeCompare(b.client));
+  return {rows,totals:rows.reduce((t,b)=>t.map((v,i)=>v+b.counts[i]),Array(n).fill(0))};
 }
-function redFlags(records,filters){
- const result=records.filter(r=>((r.branchSchedule==='Yes'&&!r.apptDate)||(r.apptDate&&(r.branchSchedule==='No'||!r.branchSchedule)))&&(!filters.recruiter||r.recruiter===filters.recruiter)&&(!filters.from||(r[filters.dateField]&&r[filters.dateField]>=filters.from))&&(!filters.to||(r[filters.dateField]&&r[filters.dateField]<=filters.to)));
- const field=filters.sort==='dateAsc'||filters.sort==='dateDesc'?filters.dateField:filters.sort;
- result.sort((a,b)=>{
-  if(field==='dateAdded'||field==='apptDate'){
-   if(!a[field]&&b[field])return 1;if(a[field]&&!b[field])return -1;
-   const n=(a[field]||'').localeCompare(b[field]||'');return (filters.sort==='dateDesc'?-n:n)||(a.candidate||'').localeCompare(b.candidate||'');
-  }
-  return (a[field]||'').localeCompare(b[field]||'')||(a.candidate||'').localeCompare(b.candidate||'');
- });if(filters.headerKey){
- const get=r=>filters.headerKey==='reason'?(r.branchSchedule==='Yes'?'Yes, no date':'Dated, not Yes'):(r[filters.headerKey]||'');
- result.sort((a,b)=>{const av=String(get(a)),bv=String(get(b));if(!av&&bv)return 1;if(av&&!bv)return -1;return av.localeCompare(bv,undefined,{numeric:filters.headerKey==='eid'})*(filters.direction==='desc'?-1:1)||(a.candidate||'').localeCompare(b.candidate||'');});
- }
-return result;
+const flagReason=r=>isYes(r)?'Yes, no date':'Dated, not Yes';
+function redFlags(rows,f){
+  const out=rows.filter(r=>((isYes(r)&&!r.apptDate)||(r.apptDate&&!isYes(r)))&&(!f.recruiter||r.recruiter===f.recruiter)&&(!f.from||(r[f.dateField]&&r[f.dateField]>=f.from))&&(!f.to||(r[f.dateField]&&r[f.dateField]<=f.to)));
+  const key=f.headerKey||(f.sort==='dateAsc'||f.sort==='dateDesc'?f.dateField:f.sort), desc=f.headerKey?f.direction==='desc':f.sort==='dateDesc';
+  const get=r=>key==='reason'?flagReason(r):String(r[key]||'');
+  out.sort((a,b)=>{ const av=get(a),bv=get(b); if(!av&&bv) return 1; if(av&&!bv) return -1; return av.localeCompare(bv,undefined,{numeric:key==='eid'})*(desc?-1:1)||String(a.eid).localeCompare(String(b.eid),undefined,{numeric:true}); });
+  return out;
 }
 function replaceDimensionGroup(groups,members,name,id){
- const picked=new Set(members);
- if(picked.size<2)return groups;
- // Membership is exclusive within a dimension; an item cannot count in two groups.
- const kept=groups.map(g=>({...g,members:g.members.filter(m=>!picked.has(m))})).filter(g=>g.members.length>=2);
- return [...kept,{id,name:name.trim()||Array.from(picked).join(' / '),members:Array.from(picked)}];
+  const picked=new Set(members); if(picked.size<2) return groups;
+  const kept=groups.map(g=>({...g,members:g.members.filter(m=>!picked.has(m))})).filter(g=>g.members.length>=2);
+  return [...kept,{id,name:name.trim()||[...picked].join(' / '),members:[...picked]}];
 }
-function toTSV(matrix){return matrix.map(row=>row.map(v=>{let s=String(v??'').replace(/[\r\n\t]+/g,' ');return typeof v==='string'&&/^[=+@-]/.test(s)?"'"+s:s;}).join('\t')).join('\n');}
-
-function contextualValues(data,state,kind){
- const opposite=new Set(kind==='client'?state.locations:state.clients),hidden=new Set(kind==='client'?state.hiddenClients:state.hiddenLocations),otherHidden=new Set(kind==='client'?state.hiddenLocations:state.hiddenClients);
- return Array.from(new Set(data.filter(r=>opposite.has(kind==='client'?r.location:r.client)&&!otherHidden.has(kind==='client'?r.location:r.client)&&!hidden.has(kind==='client'?r.client:r.location)).map(r=>kind==='client'?r.client:r.location))).sort();
-}
-
-function dragReportPairs(data,kind,members,opposite){
- const picked=new Set(members),scope=new Set(opposite);
- return Array.from(new Set(data.filter(r=>picked.has(kind==='client'?r.client:r.location)&&(!scope.size||scope.has(kind==='client'?r.location:r.client))).map(r=>JSON.stringify([r.client,r.location]))));
+const toTSV=m=>m.map(row=>row.map(v=>{ const s=String(v??'').replace(/[\r\n\t]+/g,' '); return typeof v==='string'&&/^[=+@-]/.test(s)?"'"+s:s; }).join('\t')).join('\n');
+const headers=()=>state.module==='west'?WEST_HEADERS:NS_HEADERS;
+const reportMatrix=()=>[headers(),...report.rows.map(r=>[r.client,r.location,...r.counts]),['Total','',...report.totals]];
+const flagMatrix=()=>[FLAG_COLS.map(c=>c[1]),...flags.map(r=>[r.recruiter||'—',r.eid||'—',r.client,r.location,r.dateAdded||'—',r.branchSchedule||'Blank',r.apptDate||'—',flagReason(r)])];
+function contextualValues(kind){
+  const opp=new Set(kind==='client'?state.locations:state.clients), hidden=new Set(kind==='client'?state.hiddenClients:state.hiddenLocations), otherHidden=new Set(kind==='client'?state.hiddenLocations:state.hiddenClients);
+  return [...new Set(scoped().filter(r=>opp.has(kind==='client'?r.location:r.client)&&!otherHidden.has(kind==='client'?r.location:r.client)&&!hidden.has(kind==='client'?r.client:r.location)).map(r=>kind==='client'?r.client:r.location))].sort();
 }
 
-(function(){
-const $=id=>document.getElementById(id), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const DATA_KEY='divisionReporting.JK.data.v3',STATE_KEY='divisionReporting.JK.view.v3';
-let data=[],fileName='',allClients=[],allLocations=[],report={rows:[],totals:[]},flags=[];
-function fresh(){const today=localDay(new Date());return {module:'ns',addedPairs:[],removedPairs:[],hiddenPairs:[],rowGroups:[],flagsEnabled:false,clients:[],locations:[],hiddenClients:[],hiddenLocations:[],clientGroups:[],locationGroups:[],search:'',scheduleDate:today,interviewDate:today,weekEnd:today,flags:{recruiter:'',dateField:'dateAdded',from:'',to:'',sort:'recruiter'}}}
-let state=fresh();
-function status(text,error=false){$('status').textContent=text;$('status').classList.toggle('error',error)}
-function save(){try{localStorage.setItem(STATE_KEY,JSON.stringify(state))}catch(e){status('View could not be saved in this browser.',true)}}
-function saveData(){try{localStorage.setItem(DATA_KEY,JSON.stringify({rows:data,fileName}))}catch(e){status('File loaded. Browser storage is full; this file is not saved.',true)}}
-function matrix(){return state.module==='west'?WEST_HEADERS:NS_HEADERS}
-function flagMatrix(){return [FLAG_HEADERS,...flags.map(r=>[r.recruiter||'—',r.candidate||'—',r.eid||'—',r.client,r.location,r.branchSchedule||'Blank',r.apptDate||'—',r.branchSchedule==='Yes'?'Yes, no date':'Dated, not Yes'])]}
-function reportMatrix(){return [matrix(),...report.rows.map(r=>[r.client,r.location,...r.counts]),['Total','',...report.totals]]}
-function updateLists(){
- allClients=Array.from(new Set(data.map(r=>r.client))).sort();allLocations=Array.from(new Set(data.map(r=>r.location))).sort();
- $('file-name').textContent=fileName?fileName+' · '+data.length.toLocaleString()+' records':'No file loaded';
- const recruiters=Array.from(new Set(data.map(r=>r.recruiter).filter(Boolean))).sort();$('recruiter').innerHTML='<option value="">All recruiters</option>'+recruiters.map(n=>'<option value="'+esc(n)+'">'+esc(n)+'</option>').join('');
- if(!recruiters.includes(state.flags.recruiter))state.flags.recruiter='';
- buildFilters();syncControls();
+// ---------- opening the Excel file ----------
+async function waitXLSX(){ for(let i=0;i<60&&typeof XLSX==='undefined';i++) await new Promise(r=>setTimeout(r,100)); return typeof XLSX!=='undefined'; }
+function findSheet(book){
+  for(const name of book.SheetNames){
+    const aoa=XLSX.utils.sheet_to_json(book.Sheets[name],{header:1,defval:null,raw:true,blankrows:false});
+    for(let h=0;h<Math.min(15,aoa.length);h++){
+      const head=(aoa[h]||[]).map(v=>String(v??'').trim().toLowerCase());
+      if(head.includes('client list selector')&&head.includes('job site')) return {name,head,rows:aoa.slice(h+1)};
+    }
+  }
+  return null;
+}
+async function openFile(f){
+  if(!f) return;
+  if(!/\.(xlsx|xls|xlsm)$/i.test(f.name)){ fail('Choose an Excel file (.xlsx or .xls).'); return; }
+  if(!await waitXLSX()){ fail('The Excel reader didn’t load. Check your connection and reload the page.'); return; }
+  try{
+    const book=XLSX.read(await f.arrayBuffer(),{type:'array'});
+    const sh=findSheet(book); if(!sh) throw new Error('This file has no “Client List Selector” and “Job Site” columns. Use the PowerApp export.');
+    const col=(...names)=>{ for(const n of names){ const i=sh.head.indexOf(n.toLowerCase()); if(i>=0) return i; } return -1; };
+    const C={client:col('Client List Selector'),site:col('Job Site'),rec:col('Recruiter Name','Recruiter'),eid:col('EID','Employee Number'),added:col('Date Added'),
+      appt:col('Branch Appointment Date'),appt2:col('Branch Schedule Date'),yes:col('Branch Schedule?','Branch Schedule'),stage:col('Onboarding Stage'),reason:col('EB Status Reason','Status Reason')};
+    const val=(row,i)=>i<0?null:row[i];
+    const str=v=>v==null?'':String(v).trim();
+    const yn=v=>{ const s=str(v); return /^(yes|y|true)$/i.test(s)?'Yes':/^(no|n|false)$/i.test(s)?'No':s; };
+    const rows=sh.rows.filter(r=>r&&(str(val(r,C.client))||str(val(r,C.site)))).map(r=>{ const a=val(r,C.appt); return {
+      client:str(val(r,C.client))||'(No client)', location:normalizeLocation(val(r,C.site))||'(No location)', recruiter:str(val(r,C.rec)), eid:str(val(r,C.eid)),
+      dateAdded:parseDay(val(r,C.added)), apptDate:parseDay(a!=null&&str(a)!==''?a:val(r,C.appt2)), branchSchedule:yn(val(r,C.yes)),
+      onboardingStage:str(val(r,C.stage)), ebStatusReason:str(val(r,C.reason))}; });
+    if(!rows.length) throw new Error('No usable rows found in this file.');
+    data=rows; file={name:f.name,sheet:sh.name,count:rows.length};
+    // a new file starts with every client and location ticked
+    state.clients=[...new Set(data.map(r=>r.client))]; state.locations=[...new Set(data.map(r=>r.location))];
+    if(state.module!=='west'&&state.module!=='flags') state.module='ns';
+    status('Loaded '+f.name+' · '+nf(rows.length)+' rows.');
+    $('landingErr').textContent='';
+    show();
+  }catch(e){ console.error(e); fail(e.message||'This file couldn’t be read.'); }
+}
+function fail(t){ if(data.length) { status(t,true); toast(t); } else $('landingErr').textContent=t; }
+function status(text,error=false){ msg={text,error}; const el=$('status'); if(el){ el.textContent=text; el.classList.toggle('error',!!error); } }
+
+// ---------- dialog ----------
+function dialog(html){
+  const d=document.createElement('div'); d.className='overlay'; d.innerHTML=`<div class="modal" role="dialog" aria-modal="true">${html}</div>`; document.body.append(d);
+  const onKey=e=>{ if(e.key==='Escape'){ e.stopPropagation(); close(); } };
+  const close=()=>{ d.remove(); document.removeEventListener('keydown',onKey,true); };
+  d.addEventListener('click',e=>{ if(e.target.closest('[data-close]')) close(); }); document.addEventListener('keydown',onKey,true);
+  d.close=close; return d;
+}
+
+// ---------- page ----------
+function tabs(){ return [['ns','North / SE / SC'],['west','West weekly'],['flags','Red flags']]; }
+function show(){
+  const has=!!data.length;
+  $('landing').hidden=has; $('tabs').hidden=!has; $('app').hidden=!has; $('fileChip').hidden=!has; $('clearBtn').hidden=!has;
+  $('openBtn').textContent=has?'Open another file':'Open Excel file';
+  if(!has) return;
+  $('fileName').textContent=file.name+' · '+nf(file.count)+' rows · not saved';
+  const fr=data.map(r=>r.dateAdded).filter(Boolean).sort();
+  $('fileRange').textContent=fr.length?'Date added in file: '+fmtDate(fr[0])+' – '+fmtDate(fr[fr.length-1]):'';
+  syncControls(); paintDims(); paintSaved(); render();
 }
 function syncControls(){
- $('search').value=state.search;$('schedule-date').value=state.scheduleDate;$('interview-date').value=state.interviewDate;$('week-end').value=state.weekEnd;
- $('recruiter').value=state.flags.recruiter;$('flag-date-field').value=state.flags.dateField;$('flag-from').value=state.flags.from;$('flag-to').value=state.flags.to;$('flag-sort').value=state.flags.sort;
+  $('search').value=state.search; $('scheduleDate').value=state.scheduleDate; $('interviewDate').value=state.interviewDate; $('weekEnd').value=state.weekEnd;
+  const recs=[...new Set(data.map(r=>r.recruiter).filter(Boolean))].sort(); if(!recs.includes(state.flags.recruiter)) state.flags.recruiter='';
+  $('fRecruiter').innerHTML='<option value="">All recruiters</option>'+recs.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join('');
+  $('fRecruiter').value=state.flags.recruiter; $('fDateField').value=state.flags.dateField; $('fFrom').value=state.flags.from; $('fTo').value=state.flags.to; $('fSort').value=state.flags.sort;
 }
-function buildFilters(){
- $('dimension-filters').innerHTML='';
- ['client','location'].forEach(kind=>{
-  const box=document.createElement('details');box.className='filter-box';box.id=kind+'-filter';box.innerHTML='<summary>'+ (kind==='client'?'Clients':'Locations')+'<span class="filter-count"></span></summary><div class="filter-inside"><input type="search" placeholder="Search '+kind+'s" aria-label="Search '+kind+'s"><div class="mini-actions"><button type="button" data-all>Select all</button><button type="button" data-none>Clear</button></div><div class="check-list"></div></div>';
-  $('dimension-filters').append(box);box.querySelector('input[type=search]').oninput=()=>paintFilter(kind);
-  box.querySelector('[data-all]').onclick=()=>{state[kind+'s']=[...(kind==='client'?allClients:allLocations)];paintFilter(kind);render()};
-  box.querySelector('[data-none]').onclick=()=>{state[kind+'s']=[];box.querySelector('input[type=search]').value='';paintFilter(kind);render()};paintFilter(kind);
- });
+function paintDims(){
+  const box=$('dims'); box.innerHTML='';
+  ['client','location'].forEach(kind=>{
+    const d=document.createElement('details'); d.className='dim'; d.id=kind+'Filter';
+    d.innerHTML=`<summary>${kind==='client'?'Clients':'Locations'}<span class="cnt"></span></summary><div class="dim-in"><input type="search" placeholder="Search ${kind}s" aria-label="Search ${kind}s"><div class="mini"><button type="button" data-all>Select all</button><button type="button" data-none>Clear</button></div><div class="checks"></div></div>`;
+    box.append(d);
+    d.querySelector('input').oninput=()=>paintFilter(kind);
+    d.querySelector('[data-all]').onclick=()=>{ state[kind+'s']=[...new Set([...state[kind+'s'],...(kind==='client'?allClients():allLocations())])]; paintFilter(kind); render(); };
+    d.querySelector('[data-none]').onclick=()=>{ const drop=new Set(kind==='client'?allClients():allLocations()); state[kind+'s']=state[kind+'s'].filter(v=>!drop.has(v)); d.querySelector('input').value=''; paintFilter(kind); render(); };
+    paintFilter(kind);
+  });
 }
 function paintFilter(kind){
- const box=$(kind+'-filter');if(!box)return;
- const values=kind==='client'?allClients:allLocations,key=kind+'s',chosen=new Set(state[key]),hidden=new Set(state[kind==='client'?'hiddenClients':'hiddenLocations']),groups=state[kind+'Groups'];
- box.querySelector('.filter-count').textContent=values.filter(v=>chosen.has(v)&&!hidden.has(v)).length+'/'+values.length;
- const term=box.querySelector('input[type=search]').value.toLowerCase(),list=box.querySelector('.check-list');list.innerHTML='';
- function checkbox(name,members,isGroup){
-  const available=members.filter(m=>!hidden.has(m)),checked=available.filter(m=>chosen.has(m)).length;
-  const label=document.createElement('label');label.className='check-item'+(!available.length?' is-hidden':'');const cb=document.createElement('input');cb.type='checkbox';cb.checked=!!available.length&&checked===available.length;cb.indeterminate=checked>0&&checked<available.length;cb.disabled=!available.length;
-  const span=document.createElement('span');span.textContent=name+(isGroup?' · group':'');label.append(cb,span);list.append(label);span.draggable=true;span.classList.add('draggable-item');span.title='Drag to report';span.ondragstart=e=>{e.dataTransfer.setData('application/x-jk-report',JSON.stringify({kind,members:available}));e.dataTransfer.effectAllowed='copy'};
-  cb.onchange=()=>{const next=new Set(state[key]);available.forEach(v=>cb.checked?next.add(v):next.delete(v));state[key]=Array.from(next);paintFilter(kind);render()};
- }
- groups.filter(g=>(g.name+' '+g.members.join(' ')).toLowerCase().includes(term)).forEach(g=>checkbox(g.name,g.members,true));
- values.filter(v=>v.toLowerCase().includes(term)).forEach(v=>checkbox(v,[v],false));
+  const box=$(kind+'Filter'); if(!box) return;
+  const values=kind==='client'?allClients():allLocations(), key=kind+'s', chosen=new Set(state[key]), hidden=new Set(state[kind==='client'?'hiddenClients':'hiddenLocations']), present=new Set(values);
+  const groups=state[kind+'Groups'].filter(g=>g.members.some(m=>present.has(m)));
+  box.querySelector('.cnt').textContent=values.filter(v=>chosen.has(v)&&!hidden.has(v)).length+' / '+values.length;
+  const term=box.querySelector('input').value.toLowerCase(), list=box.querySelector('.checks'); list.innerHTML='';
+  const item=(name,members,isGroup)=>{
+    const avail=members.filter(m=>!hidden.has(m)&&present.has(m)), on=avail.filter(m=>chosen.has(m)).length;
+    const lab=document.createElement('label'); lab.className='check'+(!avail.length?' off':'');
+    const cb=document.createElement('input'); cb.type='checkbox'; cb.checked=!!avail.length&&on===avail.length; cb.indeterminate=on>0&&on<avail.length; cb.disabled=!avail.length;
+    const sp=document.createElement('span'); sp.textContent=name; if(isGroup){ const g=document.createElement('em'); g.textContent='group'; sp.append(g); }
+    lab.append(cb,sp); list.append(lab);
+    cb.onchange=()=>{ const next=new Set(state[key]); avail.forEach(v=>cb.checked?next.add(v):next.delete(v)); state[key]=[...next]; paintFilter(kind); render(); };
+  };
+  groups.filter(g=>(g.name+' '+g.members.join(' ')).toLowerCase().includes(term)).forEach(g=>item(g.name,g.members,true));
+  values.filter(v=>v.toLowerCase().includes(term)).forEach(v=>item(v,[v],false));
+  if(!list.children.length) list.innerHTML='<p class="hint">Nothing here.</p>';
+}
+function savedItem(list,text,btnText,label,onclick,sub){
+  const it=document.createElement('div'); it.className='saved-item'; const sp=document.createElement('span'); sp.textContent=text; sp.title=text;
+  if(sub){ const s=document.createElement('small'); s.textContent=sub; sp.append(s); }
+  const b=document.createElement('button'); b.type='button'; b.className='x'; b.textContent=btnText; b.setAttribute('aria-label',label); b.title=label; b.onclick=onclick; it.append(sp,b); list.append(it);
 }
 function paintSaved(){
- const added=$('added-list');added.innerHTML='';$('added-summary').textContent='Individual rows · '+state.addedPairs.length;
- state.addedPairs.forEach(key=>{const pair=JSON.parse(key),item=document.createElement('div');item.className='saved-item';const text=document.createElement('span');text.textContent=pair.join(' · ');text.title=text.textContent;const remove=document.createElement('button');remove.className='icon-button';remove.textContent='×';remove.setAttribute('aria-label','Remove added row '+text.textContent);remove.onclick=()=>{removeReportPairs([key])};item.append(text,remove);added.append(item)});
-
- const list=$('groups-list');list.innerHTML='';const total=state.clientGroups.length+state.locationGroups.length+state.rowGroups.length;$('groups-summary').textContent='Groups · '+total;
- ['client','location'].forEach(kind=>state[kind+'Groups'].forEach(g=>{
-  const item=document.createElement('div');item.className='saved-item';const text=document.createElement('span');text.textContent=g.name;text.title=g.name;const sub=document.createElement('small');sub.textContent=g.members.length+' '+kind+'s';text.append(sub);const button=document.createElement('button');button.className='icon-button';button.textContent='×';button.title='Ungroup';button.setAttribute('aria-label','Ungroup '+g.name);button.onclick=()=>{state[kind+'Groups']=state[kind+'Groups'].filter(x=>x.id!==g.id);refresh()};item.append(text,button);list.append(item);
- }));
- state.rowGroups.forEach(g=>{const item=document.createElement('div');item.className='saved-item';const text=document.createElement('span');text.textContent=g.clientLabel+' · '+g.locationLabel;text.title=text.textContent;const button=document.createElement('button');button.className='icon-button';button.textContent='×';button.title='Ungroup rows';button.onclick=()=>{state.rowGroups=state.rowGroups.filter(x=>x.id!==g.id);refresh()};item.append(text,button);list.append(item)});
- if(total){const clear=document.createElement('button');clear.className='quiet';clear.textContent='Ungroup all';clear.onclick=()=>{state.clientGroups=[];state.locationGroups=[];state.rowGroups=[];refresh()};list.append(clear)}
- const hidden=$('hidden-list');hidden.innerHTML='';let count=0;
- ['client','location'].forEach(kind=>{const key=kind==='client'?'hiddenClients':'hiddenLocations';state[key].forEach(v=>{count++;const item=document.createElement('div');item.className='saved-item';const span=document.createElement('span');span.textContent=v;span.title=v;const button=document.createElement('button');button.className='icon-button';button.textContent='↶';button.title='Show';button.setAttribute('aria-label','Show '+v);button.onclick=()=>{state[key]=state[key].filter(x=>x!==v);if(!state[kind+'s'].includes(v))state[kind+'s'].push(v);refresh()};item.append(span,button);hidden.append(item)})});
- state.hiddenPairs.forEach(key=>{count++;const item=document.createElement('div');item.className='saved-item';const text=document.createElement('span');text.textContent=JSON.parse(key).join(' · ');text.title=text.textContent;const show=document.createElement('button');show.className='icon-button';show.textContent='↶';show.title='Show row';show.onclick=()=>{state.hiddenPairs=state.hiddenPairs.filter(p=>p!==key);lockReportPairs([key])};item.append(text,show);hidden.append(item)});
- $('hidden-summary').textContent='Hidden · '+count;
- if(count){const show=document.createElement('button');show.className='quiet';show.textContent='Show all hidden';show.onclick=()=>{state.clients=Array.from(new Set([...state.clients,...state.hiddenClients]));state.locations=Array.from(new Set([...state.locations,...state.hiddenLocations]));state.hiddenClients=[];state.hiddenLocations=[];state.addedPairs=Array.from(new Set([...state.addedPairs,...state.hiddenPairs]));state.hiddenPairs=[];refresh()};hidden.append(show)}
+  const added=$('addedList'); added.innerHTML=''; $('addedSum').textContent='Added rows · '+state.addedPairs.length;
+  state.addedPairs.forEach(k=>savedItem(added,JSON.parse(k).join(' · '),'×','Remove added row',()=>removePairs([k])));
+  const gl=$('groupsList'); gl.innerHTML=''; const total=state.clientGroups.length+state.locationGroups.length+state.rowGroups.length; $('groupsSum').textContent='Groups · '+total;
+  ['client','location'].forEach(kind=>state[kind+'Groups'].forEach(g=>savedItem(gl,g.name,'×','Ungroup '+g.name,()=>{ state[kind+'Groups']=state[kind+'Groups'].filter(x=>x.id!==g.id); refresh(); },g.members.length+' '+kind+'s')));
+  state.rowGroups.forEach(g=>savedItem(gl,g.clientLabel+' · '+g.locationLabel,'×','Ungroup rows',()=>{ state.rowGroups=state.rowGroups.filter(x=>x.id!==g.id); refresh(); },g.pairs.length+' rows'));
+  if(total){ const b=document.createElement('button'); b.type='button'; b.className='link'; b.textContent='Ungroup all'; b.style.marginTop='6px'; b.onclick=()=>{ state.clientGroups=[]; state.locationGroups=[]; state.rowGroups=[]; refresh(); }; gl.append(b); }
+  const hl=$('hiddenList'); hl.innerHTML=''; let count=0;
+  ['client','location'].forEach(kind=>{ const key=kind==='client'?'hiddenClients':'hiddenLocations'; state[key].forEach(v=>{ count++; savedItem(hl,v,'↶','Show '+v,()=>{ state[key]=state[key].filter(x=>x!==v); if(!state[kind+'s'].includes(v)) state[kind+'s'].push(v); refresh(); }); }); });
+  state.hiddenPairs.forEach(k=>{ count++; savedItem(hl,JSON.parse(k).join(' · '),'↶','Show row',()=>{ state.hiddenPairs=state.hiddenPairs.filter(p=>p!==k); lockPairs([k]); }); });
+  $('hiddenSum').textContent='Hidden · '+count;
+  if(count){ const b=document.createElement('button'); b.type='button'; b.className='link'; b.textContent='Show everything hidden'; b.style.marginTop='6px'; b.onclick=()=>{ state.clients=[...new Set([...state.clients,...state.hiddenClients])]; state.locations=[...new Set([...state.locations,...state.hiddenLocations])]; state.hiddenClients=[]; state.hiddenLocations=[]; state.addedPairs=[...new Set([...state.addedPairs,...state.hiddenPairs])]; state.hiddenPairs=[]; refresh(); }; hl.append(b); }
 }
-function refresh(){paintFilter('client');paintFilter('location');paintSaved();render()}
+function refresh(){ paintFilter('client'); paintFilter('location'); paintSaved(); render(); }
+
 function render(){
- const records=visibleRecords(data,state);report=groupedReport(records,state);flags=state.flagsEnabled?redFlags(data,state.flags):[];
- $('merge-rows').disabled=true;$('row-selection-count').textContent='';
- const headers=matrix();$('report-table').querySelector('thead').innerHTML='<tr><th class="action-col" aria-label="Select, remove or hide rows"></th>'+headers.map(h=>'<th scope="col">'+esc(h)+'</th>').join('')+'</tr>';
- $('report-table').querySelector('tbody').innerHTML=report.rows.length?report.rows.map((r,index)=>'<tr><td class="row-actions"><input type="checkbox" data-select-row="'+index+'" aria-label="Select row '+(index+1)+'"><button class="row-remove" data-row="'+index+'" aria-label="Remove row" title="Remove row">×</button><button class="row-hide" data-hide-row="'+index+'" title="Hide row" aria-label="Hide row">Hide</button></td><td>'+esc(r.client)+'</td><td>'+esc(r.location)+(r.pairs.size>1?'<span class="badge">merged</span>':'')+(Array.from(r.pairs).some(p=>state.addedPairs.includes(p))?'<span class="badge locked">locked</span>':'')+'</td>'+r.counts.map(n=>'<td>'+n.toLocaleString()+'</td>').join('')+'</tr>').join(''):'<tr><td class="empty-cell" colspan="'+(headers.length+1)+'">'+(data.length?'No matching data':'No file loaded')+'</td></tr>';
- $('report-table').querySelector('tfoot').innerHTML=report.rows.length?'<tr><td></td><td>Total</td><td></td>'+report.totals.map(n=>'<td>'+n.toLocaleString()+'</td>').join('')+'</tr>':'';
- $('report-table').querySelectorAll('[data-row]').forEach(button=>button.onclick=()=>removeReportPairs(Array.from(report.rows[Number(button.dataset.row)].pairs)));
- $('report-table').querySelectorAll('[data-select-row]').forEach(cb=>cb.onchange=()=>{const count=$('report-table').querySelectorAll('[data-select-row]:checked').length;$('merge-rows').disabled=count<2;$('row-selection-count').textContent=count?count+' selected':''});
- $('report-table').querySelectorAll('[data-hide-row]').forEach(button=>button.onclick=()=>{const pairs=Array.from(report.rows[Number(button.dataset.hideRow)].pairs);state.hiddenPairs=Array.from(new Set([...state.hiddenPairs,...pairs]));refresh();status('Row hidden')});
- const fm=flagMatrix();$('flag-table').querySelector('thead').innerHTML='<tr>'+FLAG_HEADERS.map((h,i)=>{const key=['recruiter','candidate','eid','client','location','branchSchedule','apptDate','reason'][i];const active=state.flags.headerKey===key;return '<th scope="col" aria-sort="'+(active?(state.flags.direction==='desc'?'descending':'ascending'):'none')+'"><button class="header-sort" data-key="'+key+'">'+esc(h)+' <span>'+(active?(state.flags.direction==='desc'?'↓':'↑'):'↕')+'</span></button></th>'}).join('')+'</tr>';
- $('flag-table').querySelector('tbody').innerHTML=flags.length?fm.slice(1).map(row=>'<tr>'+row.map((v,i)=>'<td>'+(i===7?'<span class="reason">'+esc(v)+'</span>':esc(v))+'</td>').join('')+'</tr>').join(''):'<tr><td colspan="8" class="empty-cell">No red flags</td></tr>';
- $('flag-table').querySelectorAll('[data-key]').forEach(button=>button.onclick=()=>{const key=button.dataset.key;state.flags.direction=state.flags.headerKey===key&&state.flags.direction!=='desc'?'desc':'asc';state.flags.headerKey=key;render()});
- $('flag-count').textContent=flags.length.toLocaleString();
- const stats=[['Rows',report.rows.length],['Clients',new Set(records.map(r=>r.client)).size],['Locations',new Set(records.map(r=>r.location)).size],['Schedules',state.module==='west'?report.totals[1]:report.totals[1]],['Interviews',records.filter(r=>r.apptDate&&r.apptDate===state.interviewDate).length],['Red flags',flags.length]];
- $('stats').innerHTML=stats.map(([name,n])=>'<div class="stat'+(name==='Red flags'?' alert':'')+'"><strong>'+n.toLocaleString()+'</strong><span>'+name+'</span></div>').join('');
- if(state.module==='west'){$('stats').children[4].innerHTML='<strong>'+((report.totals[2]||0)+(report.totals[3]||0)).toLocaleString()+'</strong><span>Pipeline</span>'}
- $('report-title').textContent=state.module==='west'?'West · Weekly report':'North / SE / SC';
- $('report-meta').textContent=records.length.toLocaleString()+' records · '+report.rows.length+' rows'+(state.module==='west'?' · Week ending '+state.weekEnd:'');
- $('ns-dates').hidden=state.module==='west';$('west-dates').hidden=state.module!=='west';
- ['ns','west','flags','source'].forEach(m=>{$('module-'+m).classList.toggle('active',state.module===m);$('module-'+m).setAttribute('aria-pressed',state.module===m)});
- ['merge','hide','remove','add-report'].forEach(id=>$(id).disabled=!data.length);
- const flagMode=state.module==='flags',sourceMode=state.module==='source';
- $('report-head').hidden=flagMode||sourceMode;$('report-panel').hidden=flagMode||sourceMode;$('flags-body').hidden=!flagMode;
- $('report-filters').hidden=flagMode||sourceMode;$('report-dates').hidden=flagMode||sourceMode;$('flag-controls').hidden=!flagMode;
- $('merge-rows').hidden=flagMode||sourceMode;$('row-selection-count').hidden=flagMode||sourceMode;
- $('show-flags').hidden=!flagMode;
- $('source-body').hidden=!sourceMode;$('export-tools').hidden=sourceMode;$('stats').hidden=sourceMode;
- $('export-target').value=flagMode?'flags':'report';
- $('export-target').closest('label').hidden=true;
- if(flagMode)$('stats').innerHTML='<div class="stat alert"><strong>'+flags.length.toLocaleString()+'</strong><span>Red flags</span></div>';
- const hasExport=flagMode?flags.length:report.rows.length;['download','copy'].forEach(id=>$(id).disabled=!hasExport);
- save();
+  if(!data.length) return;
+  const mod=state.module, flagMode=mod==='flags';
+  $('tabs').innerHTML=tabs().map(([k,l])=>`<button type="button" role="tab" data-mod="${k}" aria-selected="${mod===k}" class="${mod===k?'on':''}">${l}</button>`).join('');
+  $('tabs').querySelectorAll('[data-mod]').forEach(b=>b.onclick=()=>{ state.module=b.dataset.mod; paintFilter('client'); paintFilter('location'); render(); window.scrollTo({top:0}); });
+  $('reportPanel').hidden=flagMode; $('flagsPanel').hidden=!flagMode;
+  $('secDates').hidden=flagMode; $('secFilters').hidden=flagMode; $('secFlags').hidden=!flagMode;
+  $('nsDates').hidden=mod==='west'; $('westDates').hidden=mod!=='west';
+  ['mergeRows','selCount','selAll','selNone','hideSel','rmSel'].forEach(id=>$(id).hidden=flagMode);
+
+  const records=visibleRecords(scoped(),state); report=groupedReport(records,state); flags=flagMode?redFlags(data,state.flags):[];
+  $('title').textContent=mod==='west'?'West · weekly report':'North / SE / SC';
+  $('sub').textContent=nf(records.length)+' records · '+report.rows.length+' rows'+(mod==='west'?' · week ending '+fmtDate(state.weekEnd):' · schedules '+fmtDate(state.scheduleDate)+' · interviews '+fmtDate(state.interviewDate));
+
+  if(flagMode){
+    const ft=$('flagTable'), f=state.flags;
+    ft.querySelector('thead').innerHTML='<tr>'+FLAG_COLS.map(([k,h])=>{ const on=f.headerKey===k; return `<th scope="col" aria-sort="${on?(f.direction==='desc'?'descending':'ascending'):'none'}"><button type="button" class="sort" data-key="${k}">${esc(h)} <span>${on?(f.direction==='desc'?'↓':'↑'):'↕'}</span></button></th>`; }).join('')+'</tr>';
+    ft.querySelector('tbody').innerHTML=flags.length?flagMatrix().slice(1).map(row=>'<tr>'+row.map((v,i)=>`<td>${i===7?`<span class="reason">${esc(v)}</span>`:i===4||i===6?esc(v==='—'?v:fmtDate(v)):esc(v)}</td>`).join('')+'</tr>').join(''):`<tr><td colspan="${FLAG_COLS.length}" class="empty">No red flags for these filters.</td></tr>`;
+    ft.querySelectorAll('[data-key]').forEach(b=>b.onclick=()=>{ const k=b.dataset.key; f.direction=f.headerKey===k&&f.direction!=='desc'?'desc':'asc'; f.headerKey=k; render(); });
+    $('flagCount').textContent=nf(flags.length);
+  } else {
+    const H=headers(), t=$('table');
+    t.querySelector('thead').innerHTML='<tr><th class="act"><input type="checkbox" id="selHead" title="Select all rows" aria-label="Select all rows"></th>'+H.map((h,i)=>`<th scope="col" class="${i>1?'num':''}">${esc(h)}</th>`).join('')+'</tr>';
+    const empty=(!state.clients.length||!state.locations.length)?'Pick at least one client and one location on the left (or use <b>Select all</b>).':'Nothing matches these filters.';
+    t.querySelector('tbody').innerHTML=report.rows.length?report.rows.map((r,i)=>`<tr><td class="act"><input type="checkbox" data-sel="${i}" aria-label="Select row ${i+1}"><button type="button" class="x" data-rm="${i}" title="Remove row" aria-label="Remove row">×</button><button type="button" class="hide-btn" data-hide="${i}" title="Hide row">Hide</button></td><td>${esc(r.client)}</td><td>${esc(r.location)}${r.pairs.size>1?'<span class="badge">merged</span>':''}${[...r.pairs].some(p=>state.addedPairs.includes(p))?'<span class="badge">added</span>':''}</td>${r.counts.map(n=>`<td class="num">${nf(n)}</td>`).join('')}</tr>`).join(''):`<tr><td class="empty" colspan="${H.length+1}">${empty}</td></tr>`;
+    t.querySelector('tfoot').innerHTML=report.rows.length?`<tr><td></td><td>Total</td><td></td>${report.totals.map(n=>`<td class="num">${nf(n)}</td>`).join('')}</tr>`:'';
+    t.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>removePairs([...report.rows[+b.dataset.rm].pairs]));
+    t.querySelectorAll('[data-hide]').forEach(b=>b.onclick=()=>{ state.hiddenPairs=[...new Set([...state.hiddenPairs,...report.rows[+b.dataset.hide].pairs])]; refresh(); status('Row hidden — find it under Hidden to bring it back.'); });
+    const selSync=()=>{ const all=t.querySelectorAll('[data-sel]'), n=t.querySelectorAll('[data-sel]:checked').length;
+      $('mergeRows').disabled=n<2; $('hideSel').disabled=!n; $('rmSel').disabled=!n; $('selNone').disabled=!n; $('selAll').disabled=!all.length||n===all.length;
+      $('selCount').textContent=n?n+' of '+all.length+' selected':''; const h=$('selHead'); h.checked=!!all.length&&n===all.length; h.indeterminate=n>0&&n<all.length; h.disabled=!all.length; };
+    const selSet=on=>{ t.querySelectorAll('[data-sel]').forEach(cb=>cb.checked=on); selSync(); };
+    t.querySelectorAll('[data-sel]').forEach(cb=>cb.onchange=selSync);
+    $('selHead').onchange=e=>selSet(e.target.checked); $('selAll').onclick=()=>selSet(true); $('selNone').onclick=()=>selSet(false);
+    selSync();
+  }
+  const stat=(n,l,cls)=>`<div class="stat ${cls||''}"><strong>${nf(n)}</strong><span>${l}</span></div>`;
+  $('stats').innerHTML=flagMode?stat(flags.length,'Red flags','alert')+stat(new Set(flags.map(r=>r.recruiter).filter(Boolean)).size,'Recruiters')
+    :mod==='west'?stat(report.rows.length,'Rows')+stat(report.totals[0],'Pending onboarding')+stat(report.totals[1],'In branch')+stat((report.totals[2]||0)+(report.totals[3]||0),'Pipeline')
+    :stat(report.rows.length,'Rows')+stat(report.totals[1],'Schedules today')+stat(report.totals[2],'Interviews today')+stat(report.totals[4],'Total pipeline');
+  const has=flagMode?flags.length:report.rows.length; $('copyBtn').disabled=!has; $('xlsxBtn').disabled=!has;
+  ['mergeBtn','hideBtn','addBtn'].forEach(id=>$(id).disabled=!scoped().length);
+  save();
 }
+const selPairs=()=>[...$('table').querySelectorAll('[data-sel]:checked')].flatMap(cb=>[...report.rows[+cb.dataset.sel].pairs]);
+function removePairs(keys){ const rm=new Set(state.removedPairs); keys.forEach(k=>rm.add(k)); state.removedPairs=[...rm]; state.addedPairs=state.addedPairs.filter(k=>!rm.has(k)); refresh(); status('Row removed — use Add rows to bring it back.'); }
+function lockPairs(keys){ state.addedPairs=[...new Set([...state.addedPairs,...keys])]; state.removedPairs=state.removedPairs.filter(k=>!keys.includes(k)); state.hiddenPairs=state.hiddenPairs.filter(k=>!keys.includes(k)); refresh(); status(keys.length+' row'+(keys.length===1?'':'s')+' added to the report.'); }
+
+// ---------- merge / hide / add dialogs ----------
 function editDimension(action){
- if(!data.length)return;let kind='location',picked=new Set();const dialog=document.createElement('dialog');
- dialog.innerHTML='<div class="dialog-head"><h2>'+ (action==='merge'?'Merge':'Hide')+'</h2><button type="button" class="icon-button close-dialog" aria-label="Close">×</button></div><div class="mode-buttons"><label><input type="radio" name="dimension" value="location" checked> Locations</label><label><input type="radio" name="dimension" value="client"> Clients</label></div><input class="full picker-search" type="search" placeholder="Search" aria-label="Search items"><div class="mini-actions"><button type="button" class="pick-all">Select all</button><button type="button" class="pick-none">Clear</button></div><div class="check-list picker-list"></div>'+(action==='merge'?'<label class="field">Group name<input class="group-name" placeholder="Optional"></label>':'')+'<div class="preview" aria-live="polite"></div><div class="dialog-footer"><button class="cancel-dialog">Cancel</button><button class="primary apply-dialog" disabled>'+ (action==='merge'?'Merge':'Hide')+'</button></div>';
- document.body.append(dialog);const q=s=>dialog.querySelector(s);
- function available(){return contextualValues(data,state,kind)}
- function preview(){
-  q('.apply-dialog').disabled=picked.size<(action==='merge'?2:1);
-  if(action==='hide'){q('.preview').textContent=picked.size+' '+kind+(picked.size===1?'':'s')+' selected';return}
-  if(picked.size<2){q('.preview').textContent='';return}
-  const next={...state,[kind+'Groups']:replaceDimensionGroup(state[kind+'Groups'],Array.from(picked),q('.group-name').value,'preview')};
-  const result=groupedReport(visibleRecords(data,next),next);const overlaps=state[kind+'Groups'].filter(g=>g.members.some(m=>picked.has(m))).length;
-  q('.preview').innerHTML='<strong>'+report.rows.length+' → '+result.rows.length+' report rows</strong><small>'+ (kind==='location'?'Client groups unchanged.':'Location groups unchanged.')+(overlaps?' '+overlaps+' existing group(s) updated.':'')+'</small>';
- }
- function paint(){const term=q('.picker-search').value.toLowerCase(),list=q('.picker-list');list.innerHTML='';available().filter(v=>v.toLowerCase().includes(term)).forEach(v=>{const label=document.createElement('label');label.className='check-item';const cb=document.createElement('input');cb.type='checkbox';cb.checked=picked.has(v);const span=document.createElement('span');span.textContent=v;label.append(cb,span);list.append(label);cb.onchange=()=>{cb.checked?picked.add(v):picked.delete(v);preview()}});preview()}
- dialog.querySelectorAll('[name=dimension]').forEach(r=>r.onchange=()=>{kind=r.value;picked=new Set();q('.picker-search').value='';paint()});q('.picker-search').oninput=paint;if(action==='merge')q('.group-name').oninput=preview;
- q('.pick-all').onclick=()=>{picked=new Set(available());paint()};q('.pick-none').onclick=()=>{picked.clear();q('.picker-search').value='';paint()};q('.cancel-dialog').onclick=q('.close-dialog').onclick=()=>dialog.close();dialog.addEventListener('close',()=>dialog.remove());
- q('.apply-dialog').onclick=()=>{if(picked.size<(action==='merge'?2:1))return;
-  if(action==='merge')state[kind+'Groups']=replaceDimensionGroup(state[kind+'Groups'],Array.from(picked),q('.group-name').value,'g'+Date.now()+Math.random().toString(36).slice(2,7));
-  else{const key=kind==='client'?'hiddenClients':'hiddenLocations';state[key]=Array.from(new Set([...state[key],...picked]))}
-  refresh();status(action==='merge'?'Group saved':'Hidden');dialog.close();
- };paint();dialog.showModal();
+  let kind='location', picked=new Set();
+  const d=dialog(`<div class="modal-h"><h3>${action==='merge'?'Merge clients or locations':'Hide clients or locations'}</h3><button data-close aria-label="Close">×</button></div><div class="modal-b">
+    <div class="seg"><label><input type="radio" name="dim" value="location" checked> Locations</label><label><input type="radio" name="dim" value="client"> Clients</label></div>
+    <input type="search" class="search q" placeholder="Search" aria-label="Search"><div class="mini"><button type="button" class="all">Select all</button><button type="button" class="none">Clear</button></div>
+    <div class="checks list"></div>${action==='merge'?'<label class="field">Group name<input class="gname" placeholder="Optional — e.g. Louisville area"></label>':''}
+    <div class="preview" aria-live="polite"></div>
+    <div class="foot"><button type="button" class="btn" data-close>Cancel</button><button type="button" class="btn primary apply" disabled>${action==='merge'?'Merge':'Hide'}</button></div></div>`);
+  const q=s=>d.querySelector(s);
+  const preview=()=>{ q('.apply').disabled=picked.size<(action==='merge'?2:1);
+    if(action==='hide'){ q('.preview').textContent=picked.size?picked.size+' '+kind+(picked.size===1?'':'s')+' selected':''; return; }
+    if(picked.size<2){ q('.preview').textContent=''; return; }
+    const next={...state,[kind+'Groups']:replaceDimensionGroup(state[kind+'Groups'],[...picked],q('.gname').value,'preview')};
+    q('.preview').innerHTML=`<b>${report.rows.length} → ${groupedReport(visibleRecords(scoped(),next),next).rows.length} report rows</b>`; };
+  const paint=()=>{ const term=q('.q').value.toLowerCase(), list=q('.list'); list.innerHTML='';
+    contextualValues(kind).filter(v=>v.toLowerCase().includes(term)).forEach(v=>{ const lab=document.createElement('label'); lab.className='check'; const cb=document.createElement('input'); cb.type='checkbox'; cb.checked=picked.has(v); const sp=document.createElement('span'); sp.textContent=v; lab.append(cb,sp); list.append(lab); cb.onchange=()=>{ cb.checked?picked.add(v):picked.delete(v); preview(); }; });
+    if(!list.children.length) list.innerHTML='<p class="hint">Nothing to pick — tick some clients and locations on the left first.</p>'; preview(); };
+  d.querySelectorAll('[name=dim]').forEach(r=>r.onchange=()=>{ kind=r.value; picked=new Set(); q('.q').value=''; paint(); });
+  q('.q').oninput=paint; if(action==='merge') q('.gname').oninput=preview;
+  q('.all').onclick=()=>{ picked=new Set(contextualValues(kind)); paint(); }; q('.none').onclick=()=>{ picked.clear(); paint(); };
+  q('.apply').onclick=()=>{ if(action==='merge') state[kind+'Groups']=replaceDimensionGroup(state[kind+'Groups'],[...picked],q('.gname').value,'g'+Date.now()+Math.random().toString(36).slice(2,7));
+    else { const key=kind==='client'?'hiddenClients':'hiddenLocations'; state[key]=[...new Set([...state[key],...picked])]; }
+    refresh(); status(action==='merge'?'Group saved.':'Hidden — find it under Hidden to bring it back.'); d.close(); };
+  paint(); q('.q').focus();
 }
-async function loadFile(file){
- if(!file)return;if(!/\.xlsx?$/i.test(file.name)){status('Choose an Excel file (.xlsx or .xls).',true);return}
- if(typeof XLSX==='undefined'){status('Excel library unavailable. Connect to the internet and reload.',true);return}
- status('Reading file…');
- try{
-  const book=XLSX.read(await file.arrayBuffer(),{type:'array',cellDates:true});let imported=null;
-  for(const name of book.SheetNames){const records=XLSX.utils.sheet_to_json(book.Sheets[name],{defval:null});if(records.length&&'Client List Selector' in records[0]&&'Job Site' in records[0]){imported=records;break}}
-  if(!imported)throw new Error('Missing Client List Selector / Job Site columns.');
-  const str=v=>v==null?'':String(v).trim();
-  const parsed=imported.filter(r=>str(r['Client List Selector'])||str(r['Job Site'])).map((r,i)=>({id:i,client:str(r['Client List Selector'])||'(No client)',location:normalizeLocation(r['Job Site'])||'(No location)',candidate:str(r['Candidate Name']),recruiter:str(r['Recruiter Name']),eid:str(r.EID),dateAdded:parseDay(r['Date Added']),apptDate:parseDay(r['Branch Appointment Date']??r['Branch Schedule Date']),branchSchedule:str(r['Branch Schedule?']),onboardingStage:str(r['Onboarding Stage']),ebStatusReason:str(r['EB Status Reason'])}));
-  if(!parsed.length)throw new Error('No usable records found.');
-  data=parsed;fileName=file.name;state=fresh();state.module='source';status('');updateLists();paintSaved();render();saveData();
- }catch(e){status(e.message||'Unable to read this file.',true)}finally{$('file').value=''}
+function addRows(){
+  const pairs=[...new Map(scoped().map(r=>[pairKey(r.client,r.location),[r.client,r.location]])).entries()].sort((a,b)=>a[1][0].localeCompare(b[1][0])||a[1][1].localeCompare(b[1][1]));
+  const picked=new Set();
+  const d=dialog(`<div class="modal-h"><h3>Add rows to the report</h3><button data-close aria-label="Close">×</button></div><div class="modal-b"><p class="hint" style="margin-top:0">Added rows always show, whatever the filters.</p><input type="search" class="search q" placeholder="Search client or location" aria-label="Search"><div class="mini"><button type="button" class="all">Select all shown</button><button type="button" class="none">Clear</button><span class="hint pn"></span></div><div class="checks list"></div><div class="foot"><button type="button" class="btn" data-close>Cancel</button><button type="button" class="btn primary apply" disabled>Add to report</button></div></div>`);
+  const q=s=>d.querySelector(s);
+  const shown=()=>{ const term=q('.q').value.toLowerCase(); return pairs.filter(([,p])=>p.join(' ').toLowerCase().includes(term)); };
+  const sync=()=>{ q('.apply').disabled=!picked.size; q('.apply').textContent='Add to report'+(picked.size?' ('+picked.size+')':''); q('.pn').textContent=picked.size?picked.size+' selected':''; };
+  const paint=()=>{ const list=q('.list'); list.innerHTML='';
+    shown().slice(0,400).forEach(([k,p])=>{ const lab=document.createElement('label'); lab.className='check'; const cb=document.createElement('input'); cb.type='checkbox'; cb.checked=picked.has(k); const sp=document.createElement('span'); sp.textContent=p.join(' · '); lab.append(cb,sp); list.append(lab); cb.onchange=()=>{ cb.checked?picked.add(k):picked.delete(k); sync(); }; }); sync(); };
+  q('.q').oninput=paint; q('.all').onclick=()=>{ shown().forEach(([k])=>picked.add(k)); paint(); }; q('.none').onclick=()=>{ picked.clear(); paint(); };
+  q('.apply').onclick=()=>{ lockPairs([...picked]); d.close(); }; paint(); q('.q').focus();
+}
+function mergeRows(){
+  const t=$('table'), sel=[...t.querySelectorAll('[data-sel]:checked')].map(cb=>report.rows[+cb.dataset.sel]); if(sel.length<2) return;
+  const pairs=[...new Set(sel.flatMap(r=>[...r.pairs]))];
+  const d=dialog(`<div class="modal-h"><h3>Merge ${sel.length} rows</h3><button data-close aria-label="Close">×</button></div><div class="modal-b"><label class="field">Client label<input class="rc"></label><label class="field">Location label<input class="rl"></label><div class="foot"><button type="button" class="btn" data-close>Cancel</button><button type="button" class="btn primary apply">Merge rows</button></div></div>`);
+  d.querySelector('.rc').value=[...new Set(sel.map(r=>r.client))].join(' / '); d.querySelector('.rl').value=[...new Set(sel.map(r=>r.location))].join(' / ');
+  d.querySelector('.apply').onclick=()=>{ const set=new Set(pairs); state.rowGroups=state.rowGroups.filter(g=>!g.pairs.some(p=>set.has(p)));
+    state.rowGroups.push({id:'rows'+Date.now(),pairs,clientLabel:d.querySelector('.rc').value.trim()||'Merged clients',locationLabel:d.querySelector('.rl').value.trim()||'Merged locations'});
+    d.close(); lockPairs(pairs); status('Rows merged.'); };
 }
 
-
-function removeReportPairs(keys){const removed=new Set(state.removedPairs);keys.forEach(k=>removed.add(k));state.removedPairs=Array.from(removed);state.addedPairs=state.addedPairs.filter(k=>!removed.has(k));refresh();status('Row removed')}
-function lockReportPairs(keys){state.addedPairs=Array.from(new Set([...state.addedPairs,...keys]));state.removedPairs=state.removedPairs.filter(k=>!keys.includes(k));state.hiddenPairs=state.hiddenPairs.filter(k=>!keys.includes(k));refresh();status(keys.length+' row(s) locked in report')}
-$('report-panel').addEventListener('dragover',e=>{if(Array.from(e.dataTransfer.types).includes('application/x-jk-report')){e.preventDefault();e.dataTransfer.dropEffect='copy';$('report-panel').classList.add('drop-ready')}});
-$('report-panel').addEventListener('dragleave',()=>$('report-panel').classList.remove('drop-ready'));
-$('report-panel').addEventListener('drop',e=>{
- const payload=e.dataTransfer.getData('application/x-jk-report');if(!payload)return;e.preventDefault();e.stopPropagation();$('report-panel').classList.remove('drop-ready');
- try{const item=JSON.parse(payload);if(!['client','location'].includes(item.kind)||!Array.isArray(item.members))return;const members=new Set(item.members),other=new Set(item.kind==='client'?state.locations:state.clients);
- const keys=dragReportPairs(data,item.kind,Array.from(members),Array.from(other));if(keys.length)lockReportPairs(keys);else status('No rows match the selected '+(item.kind==='client'?'locations':'clients')+'. Clear that filter to add all matching rows.',true);
- }catch(e){status('Unable to add these rows',true)}
-});
-
-function addToReport(){
- const pairs=Array.from(new Map(data.map(r=>[JSON.stringify([r.client,r.location]),[r.client,r.location]])).entries()).sort((a,b)=>a[1][0].localeCompare(b[1][0])||a[1][1].localeCompare(b[1][1]));
- const picked=new Set(),dialog=document.createElement('dialog');dialog.innerHTML='<div class="dialog-head"><h2>Add individual rows</h2><button class="icon-button close-add" aria-label="Close">×</button></div><input type="search" class="full pair-search" placeholder="Search client or location" aria-label="Search client or location"><div class="check-list pair-list"></div><div class="dialog-footer"><button class="cancel-add">Cancel</button><button class="primary apply-add" disabled>Add to report</button></div>';document.body.append(dialog);
- const q=s=>dialog.querySelector(s);
- function paint(){const term=q('.pair-search').value.toLowerCase(),list=q('.pair-list');list.innerHTML='';pairs.filter(([,pair])=>pair.join(' ').toLowerCase().includes(term)).forEach(([key,pair])=>{const label=document.createElement('label');label.className='check-item';const cb=document.createElement('input');cb.type='checkbox';cb.checked=picked.has(key);const span=document.createElement('span');span.textContent=pair.join(' · ');label.append(cb,span);list.append(label);cb.onchange=()=>{cb.checked?picked.add(key):picked.delete(key);q('.apply-add').disabled=!picked.size;q('.apply-add').textContent='Add to report'+(picked.size?' ('+picked.size+')':'')}})}
- q('.pair-search').oninput=paint;q('.cancel-add').onclick=q('.close-add').onclick=()=>dialog.close();dialog.onclose=()=>dialog.remove();q('.apply-add').onclick=()=>{lockReportPairs(Array.from(picked));dialog.close()};paint();dialog.showModal();
-}
-$('add-report').onclick=addToReport;
-$('reset-all').onclick=()=>{const module=state.module;state=fresh();state.module=module;state.clients=[];state.locations=[];updateLists();refresh();status('All filters, groups and hidden items cleared')};
-
-
-$('show-flags').onclick=()=>{state.flagsEnabled=true;render()};
-$('merge-rows').onclick=()=>{
- const selected=Array.from($('report-table').querySelectorAll('[data-select-row]:checked')).map(cb=>report.rows[Number(cb.dataset.selectRow)]);if(selected.length<2)return;
- const pairs=Array.from(new Set(selected.flatMap(r=>Array.from(r.pairs))));
- const dialog=document.createElement('dialog');dialog.innerHTML='<div class="dialog-head"><h2>Merge selected rows</h2></div><label class="field">Client label<input id="row-client-name"></label><label class="field">Location label<input id="row-location-name"></label><div class="dialog-footer"><button class="cancel-row-merge">Cancel</button><button class="primary apply-row-merge">Merge rows</button></div>';document.body.append(dialog);
- dialog.querySelector('#row-client-name').value=Array.from(new Set(selected.map(r=>r.client))).join(' / ');dialog.querySelector('#row-location-name').value=Array.from(new Set(selected.map(r=>r.location))).join(' / ');
- dialog.querySelector('.cancel-row-merge').onclick=()=>dialog.close();dialog.onclose=()=>dialog.remove();dialog.querySelector('.apply-row-merge').onclick=()=>{
- const picked=new Set(pairs);state.rowGroups=state.rowGroups.filter(g=>!g.pairs.some(p=>picked.has(p)));state.rowGroups.push({id:'rows'+Date.now(),pairs,clientLabel:dialog.querySelector('#row-client-name').value.trim()||'Merged clients',locationLabel:dialog.querySelector('#row-location-name').value.trim()||'Merged locations'});lockReportPairs(pairs);dialog.close();status('Selected rows merged');
- };dialog.showModal();
-};
-
-$('upload').onclick=()=>$('file').click();$('file').onchange=e=>loadFile(e.target.files[0]);
-['dragover','drop'].forEach(event=>document.addEventListener(event,e=>{if(Array.from(e.dataTransfer.types).includes('Files')){e.preventDefault();if(event==='drop')loadFile(e.dataTransfer.files[0])}}));
-$('remove').onclick=()=>{data=[];fileName='';state=fresh();state.module='source';try{localStorage.removeItem(DATA_KEY);localStorage.removeItem(STATE_KEY);localStorage.removeItem('divisionReportingDashboard.dataset.v1')}catch(e){}status('');updateLists();refresh()};
-['ns','west','flags','source'].forEach(m=>$('module-'+m).onclick=()=>{state.module=m;render()});
-$('search').oninput=e=>{state.search=e.target.value;render()};$('reset-filters').onclick=()=>{state.clients=[];state.locations=[];state.search='';$('search').value='';refresh()};
-$('merge').onclick=()=>editDimension('merge');$('hide').onclick=()=>editDimension('hide');
-for(const [id,key] of [['schedule-date','scheduleDate'],['interview-date','interviewDate'],['week-end','weekEnd']])$(id).onchange=e=>{if(!e.target.value){e.target.value=state[key];return}state[key]=e.target.value;render()};
-for(const [id,key] of [['recruiter','recruiter'],['flag-date-field','dateField'],['flag-from','from'],['flag-to','to'],['flag-sort','sort']])$(id).onchange=e=>{state.flags[key]=e.target.value;if(key==='sort')delete state.flags.headerKey;render()};
-$('reset-flags').onclick=()=>{state.flags=fresh().flags;syncControls();render()};$('export-target').onchange=render;
-$('download').onclick=()=>{
- if(typeof XLSX==='undefined'){status('Excel library unavailable. Connect to the internet and reload.',true);return}
- const isFlags=$('export-target').value==='flags',values=isFlags?flagMatrix():reportMatrix(),book=XLSX.utils.book_new(),sheet=XLSX.utils.aoa_to_sheet(values);sheet['!cols']=values[0].map((_,i)=>({wch:i<2?30:22}));XLSX.utils.book_append_sheet(book,sheet,isFlags?'Red flags':state.module==='west'?'West Weekly':'Division Reporting');XLSX.writeFile(book,(isFlags?'red-flags':state.module==='west'?'west-weekly':'division-reporting')+'-'+VERSION+'-'+localDay(new Date())+'.xlsx');status('Excel downloaded');
-};
-$('copy').onclick=async()=>{
- const text=toTSV($('export-target').value==='flags'?flagMatrix():reportMatrix());
- try{if(!navigator.clipboard)throw new Error();await navigator.clipboard.writeText(text);status('Copied')}
- catch(e){const dialog=document.createElement('dialog');dialog.innerHTML='<div class="dialog-head"><h2>Copy data</h2><button aria-label="Close">×</button></div><textarea aria-label="Data to copy" style="width:100%;height:230px"></textarea>';document.body.append(dialog);dialog.querySelector('textarea').value=text;dialog.querySelector('button').onclick=()=>dialog.close();dialog.onclose=()=>dialog.remove();dialog.showModal();dialog.querySelector('textarea').select();status('Clipboard unavailable. Press Ctrl+C / Cmd+C.');}
-};
-$('mobile-toggle').onclick=()=>{$('sidebar').classList.toggle('open');$('mobile-toggle').setAttribute('aria-expanded',$('sidebar').classList.contains('open'))};
-function restore(){
- try{const raw=localStorage.getItem(DATA_KEY);let stored=raw?JSON.parse(raw):null;
- if(!stored){const old=localStorage.getItem('divisionReportingDashboard.dataset.v1');if(old){const p=JSON.parse(old);stored={fileName:p.fileName,rows:p.rows.map((r,i)=>({...r,id:i,client:r.client||'(No client)',location:r.location||'(No location)',dateAdded:parseDay(r.dateAdded),apptDate:parseDay(r.apptDate)}))}}}
- if(!stored||!Array.isArray(stored.rows)||!stored.rows.length)return;
- data=stored.rows.map((r,i)=>({...r,id:i}));fileName=stored.fileName||'Saved file';state=fresh();
-
- }catch(e){data=[];fileName='';state=fresh();status('Saved data could not be restored.',true)}
-}
-restore();updateLists();paintSaved();render();
+// ---------- wiring ----------
+$('openBtn').onclick=()=>$('fileIn').click(); $('landingOpen').onclick=()=>$('fileIn').click();
+$('fileIn').onchange=e=>{ openFile(e.target.files[0]); e.target.value=''; };
+$('clearBtn').onclick=()=>{ data=[]; file=null; report={rows:[],totals:[]}; flags=[]; status(''); show(); };
+const land=$('landing');
+['dragover','dragenter'].forEach(ev=>document.addEventListener(ev,e=>{ e.preventDefault(); if(!data.length) land.classList.add('over'); }));
+['dragleave','drop'].forEach(ev=>document.addEventListener(ev,e=>{ if(ev==='dragleave'&&e.relatedTarget) return; land.classList.remove('over'); }));
+document.addEventListener('drop',e=>{ e.preventDefault(); const f=e.dataTransfer&&e.dataTransfer.files[0]; if(f) openFile(f); });
+$('search').oninput=e=>{ state.search=e.target.value; render(); };
+for(const [id,key] of [['scheduleDate','scheduleDate'],['interviewDate','interviewDate'],['weekEnd','weekEnd']]) $(id).onchange=e=>{ if(!e.target.value){ e.target.value=state[key]; return; } state[key]=e.target.value; render(); };
+$('latestDay').onclick=()=>{ const d=data.map(r=>r.dateAdded).filter(Boolean).sort().pop(), a=data.map(r=>r.apptDate).filter(Boolean).sort().pop()||d; if(!d) return; state.scheduleDate=d; state.interviewDate=a; state.weekEnd=d; syncControls(); render(); };
+$('today').onclick=()=>{ const t=today(); state.scheduleDate=state.interviewDate=state.weekEnd=t; syncControls(); render(); };
+for(const [id,key] of [['fRecruiter','recruiter'],['fDateField','dateField'],['fFrom','from'],['fTo','to'],['fSort','sort']]) $(id).onchange=e=>{ state.flags[key]=e.target.value; if(key==='sort') delete state.flags.headerKey; render(); };
+$('resetFlags').onclick=()=>{ state.flags=freshFlags(); syncControls(); render(); };
+$('resetBtn').onclick=()=>{ if(!confirm('Reset your filters, groups, added and hidden rows?')) return; Object.assign(state,freshFilters()); state.clients=[...new Set(data.map(r=>r.client))]; state.locations=[...new Set(data.map(r=>r.location))]; syncControls(); refresh(); status('Your filters and groups were reset.'); };
+$('mergeBtn').onclick=()=>editDimension('merge'); $('hideBtn').onclick=()=>editDimension('hide'); $('addBtn').onclick=addRows; $('mergeRows').onclick=mergeRows;
+$('hideSel').onclick=()=>{ const k=selPairs(); if(!k.length) return; state.hiddenPairs=[...new Set([...state.hiddenPairs,...k])]; refresh(); status(k.length+' row(s) hidden — find them under Hidden to bring them back.'); };
+$('rmSel').onclick=()=>{ const k=selPairs(); if(!k.length) return; if(!confirm('Remove the selected rows from this report?')) return; removePairs(k); };
+$('copyBtn').onclick=async()=>{ const text=toTSV(state.module==='flags'?flagMatrix():reportMatrix()); try{ await navigator.clipboard.writeText(text); toast('Copied — paste into Excel or an email.'); }catch(e){ toast('Your browser blocked copying.'); } };
+$('xlsxBtn').onclick=()=>{ if(typeof XLSX==='undefined') return toast('The Excel writer didn’t load — check your connection.');
+  const isF=state.module==='flags', v=isF?flagMatrix():reportMatrix(), wb=XLSX.utils.book_new(), sh=XLSX.utils.aoa_to_sheet(v); sh['!cols']=v[0].map((_,i)=>({wch:isF?18:(i<2?30:22)}));
+  XLSX.utils.book_append_sheet(wb,sh,isF?'Red flags':state.module==='west'?'West weekly':'Division reporting'); XLSX.writeFile(wb,(isF?'red-flags':state.module==='west'?'west-weekly':'division-reporting')+'-'+today()+'.xlsx'); };
+show();
 })();
-
-</script></body></html>
+</script>
+</body>
+</html>
